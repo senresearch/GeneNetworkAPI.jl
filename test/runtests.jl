@@ -1,4 +1,4 @@
-using GNapi
+using GeneNetworkAPI
 using Base.Test
 
 # write your own tests here
