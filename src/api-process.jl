@@ -1,5 +1,14 @@
+# May 29th, 2019
+# Author: Chelsea Trotter
+# This file contains functions to process the response of gene network API queries. 
+
+
+
 using HTTP
 using LazyJSON #using LazyJSON package because JSON package is considerable slower
+
+# using DataFramesIO
+
 
 function get_api(url)
     response = HTTP.get(url)
@@ -32,4 +41,5 @@ function count_extra_comment_lines(array)
     end
     return iter
 end
+
 
