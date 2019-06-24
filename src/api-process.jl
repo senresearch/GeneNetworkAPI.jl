@@ -32,24 +32,36 @@ function process_csv_file(input::String; delim=',', comments=false)
     return data
 end
 
+
 function count_extra_comment_lines(array)
+    # TODO: find more elegant solution to remove extra comments starting with '@'
     done = false
     iter = 1
     comment_char = '@'
-    while !done 
+    while !done && iter<length(array)
         if array[iter, 1][1] == comment_char
             iter += 1
+            array[iter, 1][1] = '#'
         else
             done = true
         end
     end
     return iter
+
+
 end
 
 function json2mat(s::String)
+    # TODO: find more elegent solution to handle one JSON entry and multiple JSON entries at the same time. 
     json = JSON.parse(s)
-    nrows = length(json)
-    colnames = sort(collect(keys(json[1])))
+    if typeof(json) == Dict{String, Any}
+        # if json only has one entry 
+        nrows = 1
+        colnames = sort(collect(keys(json)))
+    else
+        nrows = length(json)
+        colnames = sort(collect(keys(json[1])))
+    end
     ncols = length(colnames)
 
     symbols = Array{Symbol}(undef, ncols)
@@ -60,15 +72,16 @@ function json2mat(s::String)
     mat = Array{Any}(undef, nrows, ncols)
     for i in 1:ncols 
         for j in 1:nrows
-            mat[j,i] = get(json[j], String(colnames[i]), "NA")
+            if nrows == 1
+                mat[j,i] = get(json, String(colnames[i]), "NA")
+            else   
+                mat[j,i] = get(json[j], String(colnames[i]), "NA")
+            end
         end
     end
 
-    # res1 = convert_df(mat, symbols)
-    # res2 = convert_df_slow($mat, $symbols)
-
-    # res1
-    return mat
+    res1 = convert_df(mat, symbols)
+    # res2 = convert_df_slow(mat, symbols)
     
 end
 
@@ -93,6 +106,8 @@ function convert_df(mat::Array{Any, 2}, symbols::Array{Symbol,1})
             # println("converting to string : type: $(typeof(df[symbols[i]]))")
         elseif (typeof(mat[1,i]) == Int64)
             df[symbols[i]] = convert.(Int64, mat[:,i])
+        else # default case: leave it be.
+            df[symbols[i]] = mat[:,i]
         end        
     end
     return df 
