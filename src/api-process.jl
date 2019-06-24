@@ -8,7 +8,7 @@ using HTTP
 # using LazyJSON #using LazyJSON package because JSON package is considerable slower
 using DataFrames
 using JSON
-# using DelimitedFiles
+using DelimitedFiles
 using CSV
 using BenchmarkTools
 # using DataFramesIO
@@ -64,10 +64,11 @@ function json2mat(s::String)
         end
     end
 
-    res1 = convert_df($mat, $symbols)
+    # res1 = convert_df(mat, symbols)
     # res2 = convert_df_slow($mat, $symbols)
 
-    res1
+    # res1
+    return mat
     
 end
 
