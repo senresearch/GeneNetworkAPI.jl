@@ -11,7 +11,6 @@ using JSON
 using DelimitedFiles
 using CSV
 using BenchmarkTools
-# using DataFramesIO
 
 
 function get_api(url)
@@ -80,8 +79,8 @@ function json2mat(s::String)
         end
     end
 
-    res1 = convert_df(mat, symbols)
-    # res2 = convert_df_slow(mat, symbols)
+    # res1 = convert_df(mat, symbols)
+    res2 = convert_df_slow(mat, symbols)
     
 end
 

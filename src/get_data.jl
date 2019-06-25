@@ -65,3 +65,43 @@ function info_pheno(group, trait, gn_url=gn_url())
     url = gn_url * "trait/" * group * "/" * trait
     return json2mat(get_api(url))
 end
+
+function run_gemma(dataset, trait; use_loco=false, maf=0.01, gn_url=gn_url())
+    loco = use_loco == true ? "true" : "false"
+    url = gn_url * "mapping?trait_id=" * trait * "&db=" * dataset * "&method=gemma" * "&use_loco=" * loco * "&maf=" * string(maf)
+    return json2mat(get_api(url))
+end
+
+function run_rqtl(dataset, trait; method="hk", model="normal", n_perm=0, control_marker="", interval_mapping=false, gn_url=gn_url())
+
+    methods = ["hk", "ehk", "em", "imp", "mr", "mr-imp", "mr-argmax"]
+    models=["normal", "binary", "2part", "np"]
+    if !(method in methods)
+        error("Currently does not support $method in rqtl. Please select from hk, ehk, em, imp, mr, mr-imp, mr-argmax.")
+    end
+    if !(model in models)
+        error("No $model model in rqtl. Please choose from normal, binary, 2part, np.")
+    end
+
+    im = interval_mapping == true ? "true" : "false"
+    # run_rqtl("BXDPublish", "10015", method="em", interval_mapping=TRUE)
+    url = gn_url * "mapping?trait_id=" * trait * "&db=" * dataset * "&method=rqtl" * "&rqtl_method=" * method * "&rqtl_model=" * model * "&interval_mapping=" * im 
+
+    return json2mat(get_api(url))
+end
+
+function run_correlation(dataset, group, trait; t="sample", method="pearson", n_result=500, gn_url=gn_url())
+    types = ["sample", "tissue"]
+    methods = ["pearson", "spearman"]
+
+    if !(t in types)
+        error("No $t type. Choose from sample and tissue")
+    end
+    if !(method in methods)
+        error("Currently does not support $method in correlation. Choose from pearson and spearman.")
+    end
+
+    url = gn_url * "correlation" * "?trait_id=" * trait * "&db=" * dataset * "&target_db=" * group * "&type=" * "&method=" * method * "&return=" * string(n_result)
+    return json2mat(get_api(url))
+end
+
