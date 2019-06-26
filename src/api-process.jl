@@ -23,22 +23,8 @@ function parse_json(str)
 end
 
 function process_csv_file(input::String; delim=',', comments=false)
-    io = IOBuffer(input)
-    # data = readtable(io, allowcomments=true, commentmark='#')
-    data = readdlm(io, delim, '\n', comments=comments, comment_char='#')
-    # processing extra comments marked with '@'
-    skip_count = count_extra_comment_lines(data)
-    data = data[skip_count:end,:]
-
-    s = join(
-        [join([data[i,j] for j in 1:size(data)[2]]
-        , '\t') for i in 1:size(data)[1] ], '\n')
-
-    df = DataFrames.inlinetable(s; separator='\t', header=true)
-
-    return df
-
-
+    data = replace(input, "\n@" => "\n#")
+    df = DataFrames.inlinetable(data, separator=delim, header=true, allowcomments=comments)
 end
 
 
