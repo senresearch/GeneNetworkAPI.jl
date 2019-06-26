@@ -24,11 +24,21 @@ end
 
 function process_csv_file(input::String; delim=',', comments=false)
     io = IOBuffer(input)
+    # data = readtable(io, allowcomments=true, commentmark='#')
     data = readdlm(io, delim, '\n', comments=comments, comment_char='#')
-    #processing extra comments marked with '@'
+    # processing extra comments marked with '@'
     skip_count = count_extra_comment_lines(data)
     data = data[skip_count:end,:]
-    return data
+
+    s = join(
+        [join([data[i,j] for j in 1:size(data)[2]]
+        , '\t') for i in 1:size(data)[1] ], '\n')
+
+    df = DataFrames.inlinetable(s; separator='\t', header=true)
+
+    return df
+
+
 end
 
 
@@ -47,7 +57,6 @@ function count_extra_comment_lines(array)
     end
     return iter
 
-
 end
 
 function json2mat(s::String)
@@ -55,10 +64,12 @@ function json2mat(s::String)
     return j2m(dict)
 end
 
+# convert an array of json entries to df
 function j2m(input::Array{Any,1})
     return vcat(DataFrame.(input)..., cols=:union)
 end
 
+# convert a single json entry to df
 function j2m(input::Dict{String,Any})
     return DataFrame(input)
 end
