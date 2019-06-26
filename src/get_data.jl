@@ -4,17 +4,16 @@
 
 include("./api-process.jl")
 
-
-
 function gn_url()
     return url = "http://gn2-zach.genenetwork.org/api/v_pre1/"
 end
 
 # query genotype data. 
 function get_geno(group; gn_url=gn_url())
-    # TODO: stopifnot(length(dataset) ==1)
     geno_url = gn_url * "/genotypes" * "/" * group
-    return process_csv_file(get_api(geno_url), delim='\t', comments=true)
+    # take care of extra comment symbol @ in geno file
+    data = replace(get_api(geno_url), "\n@" => "\n#")
+    return str2df(data, delim='\t', comments=true)
 end
 
 function get_pheno(dataset; trait="", gn_url=gn_url())

@@ -2,14 +2,9 @@
 # Author: Chelsea Trotter
 # This file contains functions to process the response of gene network API queries. 
 
-
-
 using HTTP
-# using LazyJSON #using LazyJSON package because JSON package is considerable slower
 using DataFrames
 using JSON
-using DelimitedFiles
-using CSV
 using BenchmarkTools
 
 
@@ -22,27 +17,8 @@ function parse_json(str)
     return JSON.parse(str)
 end
 
-function process_csv_file(input::String; delim=',', comments=false)
-    data = replace(input, "\n@" => "\n#")
-    df = DataFrames.inlinetable(data, separator=delim, header=true, allowcomments=comments)
-end
-
-
-function count_extra_comment_lines(array)
-    # TODO: find more elegant solution to remove extra comments starting with '@'
-    done = false
-    iter = 1
-    comment_char = '@'
-    while !done && iter<length(array)
-        if array[iter, 1][1] == comment_char
-            iter += 1
-            # array[iter, 1][1] = '#'
-        else
-            done = true
-        end
-    end
-    return iter
-
+function str2df(input::String; delim=',', comments=false)
+    df = DataFrames.inlinetable(input, separator=delim, header=true, allowcomments=comments)
 end
 
 function json2mat(s::String)
