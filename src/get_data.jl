@@ -66,6 +66,7 @@ function info_pheno(group, trait, gn_url=gn_url())
     return json2mat(get_api(url))
 end
 
+
 function run_gemma(dataset, trait; use_loco=false, maf=0.01, gn_url=gn_url())
     loco = use_loco == true ? "true" : "false"
     url = gn_url * "mapping?trait_id=" * trait * "&db=" * dataset * "&method=gemma" * "&use_loco=" * loco * "&maf=" * string(maf)

@@ -23,9 +23,7 @@ lg1 = list_groups("mouse")
 # Fetch Genotypes for Group/RISet
 # curl http://gn2-zach.genenetwork.org/api/v_pre1/genotypes/BXD
 # Returns a CSV file with metadata in the first few rows, sample/strain names as columns, and markers as rows. Currently only works for genotypes we have stored in .geno files; I'll add the option to download BIMBAM files soon.
-# geno_data = get_geno("BXD") 
-# TODO: fix set index error
-# Works. TODO: currently returns 2d array of Any. Need to convert to dataframe.   
+geno_data = get_geno("BXD") 
 
 # Fetch Datasets
 # curl http://gn2-zach.genenetwork.org/api/v_pre1/datasets/bxd
@@ -66,8 +64,7 @@ info_dataset("bxd", trait="10001")
 # For mRNA Expression/"ProbeSet"
 # curl http://gn2-zach.genenetwork.org/api/v_pre1/trait/HC_M2_0606_P/1436869_at
 # { "additive": -0.214087568058076, "alias": "HHG1; HLP3; HPE3; SMMCI; Dsh; Hhg1", "chr": "5", "description": "sonic hedgehog (hedgehog)", "id": 99602, "locus": "rs8253327", "lrs": 12.7711275309832, "mb": 28.457155, "mean": 9.27909090909091, "name": "1436869_at", "p_value": 0.306, "se": null, "symbol": "Shh" }
-# info_pheno("HC_M2_0606_P", "1436869_at")
-# fix error nothing should not be printed. use show, repr or custom output 
+df = info_pheno("HC_M2_0606_P", "1436869_at")
 
 
 # For "Phenotypes"
@@ -77,6 +74,32 @@ info_dataset("bxd", trait="10001")
 # { "additive": 2.39444435069444, "id": 4, "locus": "rs48756159", "lrs": 13.4974911471087 }
 info_pheno("BXD", "10001")
 
+# Run analyses
+# GEMMA:
+# trait_id (required) - ID for trait being mapped
+# db (required) - DB name for trait above (Short_Abbreviation listed when you query for datasets)
+# use_loco - Whether to use LOCO (leave one chromosome out) method (default = false)
+# maf - minor allele frequency (default = 0.01)
 run_gemma("BXDPublish", "10015", use_loco=true)
+
+# R/qtl
+# trait_id (required) - ID for trait being mapped
+# db (required) - DB name for trait above (Short_Abbreviation listed when you query for datasets)
+# rqtl_method - hk (default) | ehk | em | imp | mr | mr-imp | mr-argmax ; Corresponds to the "method" option for the R/qtl scanone function.
+# rqtl_model - normal (default) | binary | 2-part | np ; corresponds to the "model" option for the R/qtl scanone function
+# num_perm - number of permutations; 0 by default
+# control_marker - Name of marker to use as control; this relies on the user knowing the name of the marker they want to use as a covariate
+# interval_mapping - Whether to use interval mapping; "false" by default
+# pair_scan - NYI
 run_rqtl("BXDPublish", "10015", method="em", interval_mapping=true)
+
+# Calculate Correlation
+# Currently only Sample and Tissue correlations are implemented
+# This query currently takes the following parameters (though more will be added):
+# trait_id (required) - ID for trait used for correlation
+# db (required) - DB name for the trait above (this is the Short_Abbreviation listed when you query for datasets)
+# target_db (required) - Target DB name to be correlated against
+# type - sample (default) | tissue
+# method - pearson (default) | spearman
+# return - Number of results to return (default = 500)
 run_correlation("HC_M2_0606_P", "BXDPublish", "1427571_at")
