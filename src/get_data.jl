@@ -24,13 +24,13 @@ function get_pheno(dataset; trait="", gn_url=gn_url())
         # return parse_json(get_api(pheno_url))
     else 
         url = gn_url * "/sample_data" * "/" * dataset * "/" * trait 
-        return json2mat(get_api(url))
+        return json2df(get_api(url))
     end
 end
 
 function list_datasets(group;gn_url=gn_url())
     url = gn_url * "datasets/"  * group
-    return json2mat(get_api(url))
+    return json2df(get_api(url))
 end
 
 function list_species(species="", gn_url=gn_url())
@@ -39,7 +39,7 @@ function list_species(species="", gn_url=gn_url())
     else
         url = gn_url * "species"
     end
-    return json2mat(get_api(url))
+    return json2df(get_api(url))
 end
 
 function list_groups(species="", gn_url=gn_url())
@@ -48,7 +48,7 @@ function list_groups(species="", gn_url=gn_url())
     else 
         url = gn_url * "groups"
     end
-    return json2mat(get_api(url))
+    return json2df(get_api(url))
 end
 
 function info_dataset(dataset; trait="", gn_url = gn_url())
@@ -57,19 +57,19 @@ function info_dataset(dataset; trait="", gn_url = gn_url())
     else 
         url = gn_url * "dataset/" * dataset 
     end
-    return json2mat(get_api(url))
+    return json2df(get_api(url))
 end
 
 function info_pheno(group, trait, gn_url=gn_url())
     url = gn_url * "trait/" * group * "/" * trait
-    return json2mat(get_api(url))
+    return json2df(get_api(url))
 end
 
 
 function run_gemma(dataset, trait; use_loco=false, maf=0.01, gn_url=gn_url())
     loco = use_loco == true ? "true" : "false"
     url = gn_url * "mapping?trait_id=" * trait * "&db=" * dataset * "&method=gemma" * "&use_loco=" * loco * "&maf=" * string(maf)
-    return json2mat(get_api(url))
+    return json2df(get_api(url))
 end
 
 function run_rqtl(dataset, trait; method="hk", model="normal", n_perm=0, control_marker="", interval_mapping=false, gn_url=gn_url())
@@ -87,7 +87,7 @@ function run_rqtl(dataset, trait; method="hk", model="normal", n_perm=0, control
     # run_rqtl("BXDPublish", "10015", method="em", interval_mapping=TRUE)
     url = gn_url * "mapping?trait_id=" * trait * "&db=" * dataset * "&method=rqtl" * "&rqtl_method=" * method * "&rqtl_model=" * model * "&interval_mapping=" * im 
 
-    return json2mat(get_api(url))
+    return json2df(get_api(url))
 end
 
 function run_correlation(dataset, group, trait; t="sample", method="pearson", n_result=500, gn_url=gn_url())
@@ -102,6 +102,6 @@ function run_correlation(dataset, group, trait; t="sample", method="pearson", n_
     end
 
     url = gn_url * "correlation" * "?trait_id=" * trait * "&db=" * dataset * "&target_db=" * group * "&type=" * "&method=" * method * "&return=" * string(n_result)
-    return json2mat(get_api(url))
+    return json2df(get_api(url))
 end
 

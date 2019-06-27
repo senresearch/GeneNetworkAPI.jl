@@ -21,7 +21,7 @@ function str2df(input::String; delim=',', comments=false)
     df = DataFrames.inlinetable(input, separator=delim, header=true, allowcomments=comments)
 end
 
-function json2mat(s::String)
+function json2df(s::String)
     dict = JSON.parse(s)
     return j2m(dict)
 end
