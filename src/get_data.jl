@@ -3,7 +3,7 @@
 # This file contains the functions to get data from gene network APIs
 
 function gn_url()
-    return url = "http://gn2-zach.genenetwork.org/api/v_pre1/"
+    return url = "http://gn2.genenetwork.org/api/v_pre1/"
 end
 
 # query genotype data. 
@@ -18,7 +18,7 @@ function get_pheno(dataset; trait="", gn_url=gn_url())
     
     if (length(trait) == 0)
         url = gn_url * "/sample_data" * "/" * dataset 
-        return process_csv_file(get_api(url), delim=',', comments = false)
+        return CSV.read(download(url), DataFrame, delim=',')
         # return parse_json(get_api(pheno_url))
     else 
         url = gn_url * "/sample_data" * "/" * dataset * "/" * trait 
@@ -36,7 +36,7 @@ function list_species(species="", gn_url=gn_url())
         url = gn_url * "species/" * species 
     else
         url = gn_url * "species"
-    end
+0;276;0c    end
     return json2df(get_api(url))
 end
 
