@@ -1,5 +1,10 @@
 function check_gn(url::AbstractString="http://gn2.genenetwork.org/api_pre1/")
-    res = JSON.Parser.parse(String(body(HTTP.get(url))))
-    return res
+    status = HTTP.get(url).status
+    if(status==200)
+        println("GeneNetwork is alive.")
+    else
+        println("Not successful.")
+    end
+    return status
 end
 
