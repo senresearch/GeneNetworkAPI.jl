@@ -12,11 +12,12 @@ export check_gn,
     get_pheno,
     run_gemma,
     run_rqtl,
-    run_correlation
-
+    run_correlation,
+    parse_geno
 
 include("./api_process.jl")    
 include("./query.jl")
 include("./get_data.jl")
+include("./parse_geno.jl")
 
 end
