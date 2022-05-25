@@ -2,12 +2,6 @@
 # Author: Chelsea Trotter
 # This file contains functions to process the response of gene network API queries. 
 
-using HTTP
-using DataFrames
-using JSON
-using BenchmarkTools
-
-
 function get_api(url)
     response = HTTP.get(url)
     String(response.body)

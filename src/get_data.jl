@@ -2,8 +2,6 @@
 # Author: Chelsea Trotter
 # This file contains the functions to get data from gene network APIs
 
-include("./api-process.jl")
-
 function gn_url()
     return url = "http://gn2-zach.genenetwork.org/api/v_pre1/"
 end
