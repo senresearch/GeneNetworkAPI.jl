@@ -1,8 +1,8 @@
-using Requests
+using HTTP
 using JSON
 
-function checkGN(url::AbstractString="http://test-gn2.genenetwork.org/api_pre1/")
-    ans = get(url)
-    res = JSON.Parser.parse(readall(g))
+function check_gn(url::AbstractString="http://gn.genenetwork.org/api_pre1/")
+    ans = HTTP.get(url)
+    res = JSON.Parser.parse(String(g))
 end
 
