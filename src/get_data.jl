@@ -73,11 +73,10 @@ function info_pheno(group::String, gn_url=gn_url())
     return json2df(get_api(url))
 end
 
-
 function run_gemma(dataset, trait; use_loco=false, maf=0.01, gn_url=gn_url())
     loco = use_loco == true ? "true" : "false"
     url = gn_url * "mapping?trait_id=" * trait * "&db=" * dataset * "&method=gemma" * "&use_loco=" * loco * "&maf=" * string(maf)
-    return json2df(get_api(url))
+    return get_api(url) |> JSON.parse |> (x->x[1]) |> j2m
 end
 
 function run_rqtl(dataset, trait; method="hk", model="normal", n_perm=0, control_marker="", interval_mapping=false, gn_url=gn_url())
