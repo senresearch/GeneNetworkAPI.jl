@@ -6,28 +6,28 @@ function gn_url()
     return url = "http://gn2.genenetwork.org/api/v_pre1/"
 end
 
-# query genotype data. 
-function get_geno(group; gn_url=gn_url())
-    geno_url = gn_url * "/genotypes" * "/" * group
-    # take care of extra comment symbol @ in geno file
-    data = replace(get_api(geno_url), "\n@" => "\n#")
-    return str2df(data, delim='\t', comments=true)
+# # query genotype data. 
+# function get_geno(group; gn_url=gn_url())
+#     geno_url = gn_url * "/genotypes" * "/" * group
+#     # take care of extra comment symbol @ in geno file
+#     data = replace(get_api(geno_url), "\n@" => "\n#")
+#     return str2df(data, delim='\t', comments=true)
+# end
+
+# get genotype data
+function get_geno(group, format="geno", gn_url=gn_url())
+    geno_url = gn_url * "/genotypes" * "/" * group * "." * format
+    geno = parse_geno(download(geno_url))
+    return geno
 end
 
-function get_pheno(dataset; trait="", gn_url=gn_url())
-    
-    if (length(trait) == 0)
-        url = gn_url * "/sample_data" * "/" * dataset 
-        return CSV.read(download(url), DataFrame, delim=',')
-        # return parse_json(get_api(pheno_url))
-    else 
-        url = gn_url * "/sample_data" * "/" * dataset * "/" * trait 
-        return json2df(get_api(url))
-    end
+function get_pheno(dataset::String; gn_url=gn_url())
+    url = gn_url * "/sample_data" * "/" * dataset * "Publish"
+    return CSV.read(download(url), DataFrame, delim=',')
 end
 
-function list_datasets(group;gn_url=gn_url())
-    url = gn_url * "datasets/"  * group
+function get_pheno(dataset::String,trait::String; gn_url=gn_url())
+    url = gn_url * "/sample_data" * "/" * dataset * "/" * trait 
     return json2df(get_api(url))
 end
 
@@ -36,7 +36,7 @@ function list_species(species="", gn_url=gn_url())
         url = gn_url * "species/" * species 
     else
         url = gn_url * "species"
-0;276;0c    end
+    end
     return json2df(get_api(url))
 end
 
@@ -49,7 +49,12 @@ function list_groups(species="", gn_url=gn_url())
     return json2df(get_api(url))
 end
 
-function info_dataset(dataset; trait="", gn_url = gn_url())
+function list_datasets(group;gn_url=gn_url())
+    url = gn_url * "datasets/"  * group
+    return json2df(get_api(url))
+end
+
+function info_dataset(dataset, trait=""; gn_url = gn_url())
     if(length(trait) != 0)
         url = gn_url * "dataset/" * dataset * "/" * trait
     else 
@@ -58,16 +63,20 @@ function info_dataset(dataset; trait="", gn_url = gn_url())
     return json2df(get_api(url))
 end
 
-function info_pheno(group, trait, gn_url=gn_url())
+function info_pheno(group::String, trait::String, gn_url=gn_url())
     url = gn_url * "trait/" * group * "/" * trait
     return json2df(get_api(url))
 end
 
+function info_pheno(group::String, gn_url=gn_url())
+    url = gn_url * "traits/" * group * "Publish.json"
+    return json2df(get_api(url))
+end
 
 function run_gemma(dataset, trait; use_loco=false, maf=0.01, gn_url=gn_url())
     loco = use_loco == true ? "true" : "false"
     url = gn_url * "mapping?trait_id=" * trait * "&db=" * dataset * "&method=gemma" * "&use_loco=" * loco * "&maf=" * string(maf)
-    return json2df(get_api(url))
+    return get_api(url) |> JSON.parse |> (x->x[1]) |> j2m
 end
 
 function run_rqtl(dataset, trait; method="hk", model="normal", n_perm=0, control_marker="", interval_mapping=false, gn_url=gn_url())
@@ -88,7 +97,7 @@ function run_rqtl(dataset, trait; method="hk", model="normal", n_perm=0, control
     return json2df(get_api(url))
 end
 
-function run_correlation(dataset, group, trait; t="sample", method="pearson", n_result=500, gn_url=gn_url())
+function run_correlation(trait, dataset, group; t="sample", method="pearson", n_result=500, gn_url=gn_url())
     types = ["sample", "tissue"]
     methods = ["pearson", "spearman"]
 
