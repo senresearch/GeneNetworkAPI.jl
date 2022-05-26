@@ -95,5 +95,27 @@ You can see the type of population it is.  Note the short name
 
 ## Get genotypes for a group
 
+To get the genotypes of a group:
 
+````````````
+julia> get_geno("BXD") |> (x->first(x,10))
+10×240 DataFrame
+ Row │ Chr      Locus        cM       Mb       BXD1     BXD2     BXD5     BXD6     BXD8     BXD9     BXD11    BXD12    BXD13    BXD14    BXD15    BXD16    BXD18 ⋯
+     │ String3  String31     Float64  Float64  String1  String1  String1  String1  String1  String1  String1  String1  String1  String1  String1  String1  Strin ⋯
+─────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │ 1        rs31443144      1.5   3.01027  B        B        D        D        D        B        B        D        B        B        D        D        B     ⋯
+   2 │ 1        rs6269442       1.5   3.4922   B        B        D        D        D        B        B        D        B        B        D        D        B
+   3 │ 1        rs32285189      1.63  3.5112   B        B        D        D        D        B        B        D        B        B        D        D        B
+   4 │ 1        rs258367496     1.63  3.6598   B        B        D        D        D        B        B        D        B        B        D        D        B
+   5 │ 1        rs32430919      1.75  3.77702  B        B        D        D        D        B        B        D        B        B        D        D        B     ⋯
+   6 │ 1        rs36251697      1.88  3.81227  B        B        D        D        D        B        B        D        B        B        D        D        B
+   7 │ 1        rs30658298      2.01  4.43062  B        B        D        D        D        B        B        D        B        B        D        D        B
+   8 │ 1        rs51852623      2.01  4.44674  B        B        D        D        D        B        B        D        B        B        D        D        B
+   9 │ 1        rs31879829      2.14  4.51871  B        B        D        D        D        B        B        D        B        B        D        D        B     ⋯
+  10 │ 1        rs36742481      2.14  4.77632  B        B        D        D        D        B        B        D        B        B        D        D        B
+                                                                                                                                               224 columns omitted
+```
+
+Currently, we only support the `.geno` format which returns a data
+frame of genotypes with rows as marker and colyumns as individuals.
 

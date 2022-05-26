@@ -6,12 +6,19 @@ function gn_url()
     return url = "http://gn2.genenetwork.org/api/v_pre1/"
 end
 
-# query genotype data. 
-function get_geno(group; gn_url=gn_url())
-    geno_url = gn_url * "/genotypes" * "/" * group
-    # take care of extra comment symbol @ in geno file
-    data = replace(get_api(geno_url), "\n@" => "\n#")
-    return str2df(data, delim='\t', comments=true)
+# # query genotype data. 
+# function get_geno(group; gn_url=gn_url())
+#     geno_url = gn_url * "/genotypes" * "/" * group
+#     # take care of extra comment symbol @ in geno file
+#     data = replace(get_api(geno_url), "\n@" => "\n#")
+#     return str2df(data, delim='\t', comments=true)
+# end
+
+# get genotype data
+function get_geno(group, format="geno", gn_url=gn_url())
+    geno_url = gn_url * "/genotypes" * "/" * group * "." * format
+    geno = parse_geno(download(geno_url))
+    return geno
 end
 
 function get_pheno(dataset; trait="", gn_url=gn_url())
@@ -36,7 +43,7 @@ function list_species(species="", gn_url=gn_url())
         url = gn_url * "species/" * species 
     else
         url = gn_url * "species"
-0;276;0c    end
+    end
     return json2df(get_api(url))
 end
 

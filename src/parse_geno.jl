@@ -11,6 +11,6 @@ function parse_geno(filename::String)
     firstat = (x->match(r"^@",x)).( lines ) .|> !isnothing
     numat = sum( firstat )
 
-    geno = CSV.read(f,DataFrame,header=numpound+numat+1,delim='\t')
+    geno = CSV.read(filename,DataFrame,header=numpound+numat+1,delim='\t')
     return geno                
 end
