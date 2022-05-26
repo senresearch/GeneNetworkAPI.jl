@@ -21,20 +21,13 @@ function get_geno(group, format="geno", gn_url=gn_url())
     return geno
 end
 
-function get_pheno(dataset; trait="", gn_url=gn_url())
-    
-    if (length(trait) == 0)
-        url = gn_url * "/sample_data" * "/" * dataset 
-        return CSV.read(download(url), DataFrame, delim=',')
-        # return parse_json(get_api(pheno_url))
-    else 
-        url = gn_url * "/sample_data" * "/" * dataset * "/" * trait 
-        return json2df(get_api(url))
-    end
+function get_pheno(dataset::String; gn_url=gn_url())
+    url = gn_url * "/sample_data" * "/" * dataset * "Publish"
+    return CSV.read(download(url), DataFrame, delim=',')
 end
 
-function list_datasets(group;gn_url=gn_url())
-    url = gn_url * "datasets/"  * group
+function get_pheno(dataset::String,trait::String; gn_url=gn_url())
+    url = gn_url * "/sample_data" * "/" * dataset * "/" * trait 
     return json2df(get_api(url))
 end
 
@@ -56,7 +49,12 @@ function list_groups(species="", gn_url=gn_url())
     return json2df(get_api(url))
 end
 
-function info_dataset(dataset; trait="", gn_url = gn_url())
+function list_datasets(group;gn_url=gn_url())
+    url = gn_url * "datasets/"  * group
+    return json2df(get_api(url))
+end
+
+function info_dataset(dataset, trait=""; gn_url = gn_url())
     if(length(trait) != 0)
         url = gn_url * "dataset/" * dataset * "/" * trait
     else 
@@ -65,8 +63,13 @@ function info_dataset(dataset; trait="", gn_url = gn_url())
     return json2df(get_api(url))
 end
 
-function info_pheno(group, trait, gn_url=gn_url())
+function info_pheno(group::String, trait::String, gn_url=gn_url())
     url = gn_url * "trait/" * group * "/" * trait
+    return json2df(get_api(url))
+end
+
+function info_pheno(group::String, gn_url=gn_url())
+    url = gn_url * "traits/" * group * "Publish.json"
     return json2df(get_api(url))
 end
 

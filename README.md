@@ -93,11 +93,13 @@ You can see the type of population it is.  Note the short name
 (`Name`) as that will be used in queries involving that population
 (group).
 
+
 ## Get genotypes for a group
 
 To get the genotypes of a group:
 
-````````````
+
+```
 julia> get_geno("BXD") |> (x->first(x,10))
 10×240 DataFrame
  Row │ Chr      Locus        cM       Mb       BXD1     BXD2     BXD5     BXD6     BXD8     BXD9     BXD11    BXD12    BXD13    BXD14    BXD15    BXD16    BXD18 ⋯
@@ -118,4 +120,126 @@ julia> get_geno("BXD") |> (x->first(x,10))
 
 Currently, we only support the `.geno` format which returns a data
 frame of genotypes with rows as marker and colyumns as individuals.
+
+## List datasets for a group
+
+To list the (omic) datasets available for a group, you have to use the
+name as listed in the group list for a species:
+
+```
+julia> list_datasets("HSNIH-Palmer")
+10×11 DataFrame
+ Row │ AvgID  CreateTime                     DataScale  FullName                           Id     Long_Abbreviation              ProbeFreezeId  ShortName        ⋯
+     │ Int64  String                         String     String                             Int64  String                         Int64          String           ⋯
+─────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │    24  Mon, 27 Aug 2018 00:00:00 GMT  log2       HSNIH-Palmer Nucleus Accumbens C…    860  HSNIH-Rat-Acbc-RSeq-Aug18                347  HSNIH-Palmer Nuc ⋯
+   2 │    24  Sun, 26 Aug 2018 00:00:00 GMT  log2       HSNIH-Palmer Infralimbic Cortex …    861  HSNIH-Rat-IL-RSeq-Aug18                  348  HSNIH-Palmer Inf
+   3 │    24  Sat, 25 Aug 2018 00:00:00 GMT  log2       HSNIH-Palmer Lateral Habenula RN…    862  HSNIH-Rat-LHB-RSeq-Aug18                 349  HSNIH-Palmer Lat
+   4 │    24  Fri, 24 Aug 2018 00:00:00 GMT  log2       HSNIH-Palmer Prelimbic Cortex RN…    863  HSNIH-Rat-PL-RSeq-Aug18                  350  HSNIH-Palmer Pre
+   5 │    24  Thu, 23 Aug 2018 00:00:00 GMT  log2       HSNIH-Palmer Orbitofrontal Corte…    864  HSNIH-Rat-VoLo-RSeq-Aug18                351  HSNIH-Palmer Orb ⋯
+   6 │    24  Fri, 14 Sep 2018 00:00:00 GMT  log2       HSNIH-Palmer Nucleus Accumbens C…    868  HSNIH-Rat-Acbc-RSeqlog2-Aug18            347  HSNIH-Palmer Nuc
+   7 │    24  Fri, 14 Sep 2018 00:00:00 GMT  log2       HSNIH-Palmer Infralimbic Cortex …    869  HSNIH-Rat-IL-RSeqlog2-Aug18              348  HSNIH-Palmer Inf
+   8 │    24  Fri, 14 Sep 2018 00:00:00 GMT  log2       HSNIH-Palmer Lateral Habenula RN…    870  HSNIH-Rat-LHB-RSeqlog2-Aug18             349  HSNIH-Palmer Lat
+   9 │    24  Fri, 14 Sep 2018 00:00:00 GMT  log2       HSNIH-Palmer Prelimbic Cortex RN…    871  HSNIH-Rat-PL-RSeqlog2-Aug18              350  HSNIH-Palmer Pre ⋯
+  10 │    24  Fri, 14 Sep 2018 00:00:00 GMT  log2       HSNIH-Palmer Orbitofrontal Corte…    872  HSNIH-Rat-VoLo-RSeqlog2-Aug18            351  HSNIH-Palmer Orb
+                                                                                                                                                 4 columns omitted
+```
+
+## Get sample data for a group
+
+This gives you a matrix with rows as individuals/samples/strains and
+columns and "clinical" (non-omic) phenotypes.  The number after the
+underscore is the phenotype number (to be used later).  Missing data
+is denoted by `x`.
+
+```
+julia> get_pheno("HSNIH-Palmer") |> (x->first(x,10))
+10×509 DataFrame
+ Row │ id          HSR_10308  HSR_10309  HSR_10310  HSR_10311  HSR_10312  HSR_10313  HSR_10314  HSR_10315  HSR_10316  HSR_10317  HSR_10318  HSR_10319  HSR_10320  H ⋯
+     │ String15    String7    String7    String7    String7    String7    String7    String7    String15   String15   String15   String15   String15   String15   S ⋯
+─────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │ 00071F4FAF  x          x          x          x          x          x          x          x          x          x          x          x          x          x ⋯
+   2 │ 00071F6771  x          x          x          x          x          x          x          x          x          x          x          x          x          x
+   3 │ 00071F768E  x          x          x          x          x          x          x          x          x          x          x          x          x          x
+   4 │ 00071F95F9  x          x          x          x          x          x          x          x          x          x          x          x          x          x
+   5 │ 00071FB160  x          x          x          x          x          x          x          x          x          x          x          x          x          x ⋯
+   6 │ 00071FB747  x          x          x          x          x          x          x          x          x          x          x          x          x          x
+   7 │ 00072069AD  x          x          x          x          x          x          x          x          x          x          x          x          x          x
+   8 │ 0007207A73  x          x          x          x          x          x          x          x          x          x          x          x          x          x
+   9 │ 0007207BE7  x          x          x          x          x          x          x          x          x          x          x          x          x          x ⋯
+  10 │ 00072126F3  x          x          x          x          x          x          x          x          x          x          x          x          x          x
+                                                                                                                                                  495 columns omitted
+```
+
+## Get information about traits
+
+To get information on a particular (non-omic) trait use the group name
+and the trait number:
+
+```
+julia> info_dataset("HSNIH-Palmer","10308")
+1×4 DataFrame
+ Row │ dataset_type  description                        id     name                  
+     │ String        String                             Int64  String                
+─────┼───────────────────────────────────────────────────────────────────────────────
+   1 │ phenotype     Central nervous system, behavior…  10308  reaction_time_pint1_5
+```
+
+To get information on a dataset (of omic traits) for a group, use:
+
+```
+julia> info_dataset("HSNIH-Rat-Acbc-RSeq-Aug18")
+1×10 DataFrame
+ Row │ confidential  data_scale  dataset_type     full_name                          id     name                      public  short_name                         ti ⋯
+     │ Int64         String      String           String                             Int64  String                    Int64   String                             St ⋯
+─────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │            0  log2        mRNA expression  HSNIH-Palmer Nucleus Accumbens C…    860  HSNIH-Rat-Acbc-RSeq-0818       1  HSNIH-Palmer Nucleus Accumbens C…  Nu ⋯
+                                                                                                                                                    2 columns omitted
+```
+
+## Summary information on traits
+
+Get a list of the maximum LRS for each trait and position.
+
+```
+julia> info_pheno("HXBBXH") |> (x->first(x,10))
+10×7 DataFrame
+ Row │ Additive     Id     LRS       Locus        PhenotypeId  PublicationId  Sequence 
+     │ Float64?     Int64  Float64?  String?      Int64        Int64          Int64    
+─────┼─────────────────────────────────────────────────────────────────────────────────
+   1 │  0.0499968   10001  16.2831   rs106114574         1449            319         1
+   2 │ -0.0926364   10002  10.9777   rs63915446          1450            319         1
+   3 │  0.60189     10003  13.6515   rs107486115         1451            319         1
+   4 │ -0.543799    10004   8.43965  D5Rat147            1452            319         1
+   5 │  0.00854221  10005  18.5895   rs106114574         1453            319         1
+   6 │ -0.0142273   10006  11.9965   rs63915446          1454            319         1
+   7 │  0.427167    10007  10.541    rs13452609          1455            319         1
+   8 │ -0.936806    10008  13.2494   rs8143630           1456            319         1
+   9 │ -0.635833    10009   9.97609  rs107549352         1457            319         1
+  10 │ -0.681451    10010   9.59226  D7Mit13             1458            319         1
+```
+
+You could also specify a group and a trait number or a dataset and a probename.
+
+```
+julia> info_pheno("BXD","10001")
+1×4 DataFrame
+ Row │ additive  id     locus       lrs     
+     │ Float64   Int64  String      Float64 
+─────┼──────────────────────────────────────
+   1 │  2.39444      4  rs48756159  13.4975
+```
+
+```
+julia> info_pheno("HC_M2_0606_P","1436869_at")
+1×13 DataFrame
+ Row │ additive   alias                              chr     description                id     locus      lrs      mb       mean     name        p_value  se        ⋯
+     │ Float64    String                             String  String                     Int64  String     Float64  Float64  Float64  String      Float64  Nothing   ⋯
+─────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │ -0.214088  HHG1; HLP3; HPE3; SMMCI; Dsh; Hh…  5       sonic hedgehog (hedgehog)  99602  rs8253327  12.7711  28.4572  9.27909  1436869_at    0.306            ⋯
+                                                                                                                                                     1 column omitted
+```
+
+## Analysis commands
+
 
