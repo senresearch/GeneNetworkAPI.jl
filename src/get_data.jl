@@ -97,7 +97,7 @@ function run_rqtl(dataset, trait; method="hk", model="normal", n_perm=0, control
     return json2df(get_api(url))
 end
 
-function run_correlation(dataset, group, trait; t="sample", method="pearson", n_result=500, gn_url=gn_url())
+function run_correlation(trait, dataset, group; t="sample", method="pearson", n_result=500, gn_url=gn_url())
     types = ["sample", "tissue"]
     methods = ["pearson", "spearman"]
 

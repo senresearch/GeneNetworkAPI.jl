@@ -243,3 +243,54 @@ julia> info_pheno("HC_M2_0606_P","1436869_at")
 ## Analysis commands
 
 
+### GEMMA
+
+```
+julia> run_gemma("BXDPublish","10015",use_loco=true) |> (x->first(x,10))
+10×6 DataFrame
+ Row │ Mb       additive   chr  lod_score  name         p_value  
+     │ Float64  Float64    Any  Float64    String       Float64  
+─────┼───────────────────────────────────────────────────────────
+   1 │ 3.01027  -0.906398  1     0.448914  rs31443144   0.355702
+   2 │ 3.4922   -0.906398  1     0.448914  rs6269442    0.355702
+   3 │ 3.5112   -0.906398  1     0.448914  rs32285189   0.355702
+   4 │ 3.6598   -0.906398  1     0.448914  rs258367496  0.355702
+   5 │ 3.77702  -0.906398  1     0.448914  rs32430919   0.355702
+   6 │ 3.81227  -0.906398  1     0.448914  rs36251697   0.355702
+   7 │ 4.43062  -0.906398  1     0.448914  rs30658298   0.355702
+   8 │ 4.44674  -0.906398  1     0.448914  rs51852623   0.355702
+   9 │ 4.51871  -0.906398  1     0.448914  rs31879829   0.355702
+  10 │ 4.77632  -0.906398  1     0.448914  rs36742481   0.355702
+```
+
+### Correlation
+
+This function correlates a trait in a dataset against all traits in a
+target database.
+
+
+- trait_id (required) - ID for trait used for correlation
+- db (required) - DB name for the trait above (this is the Short_Abbreviation listed when you query for datasets)
+- target_db (required) - Target DB name to be correlated against
+- type - sample (default) | tissue
+- method - pearson (default) | spearman
+- return - Number of results to return (default = 500)
+
+
+```
+julia> run_correlation("HC_M2_0606_P","BXDPublish","1427571_at") |> (x->first(x,10))
+10×4 DataFrame
+ Row │ #_strains  p_value      sample_r   trait  
+     │ Int64      Float64      Float64    String 
+─────┼───────────────────────────────────────────
+   1 │         6  0.00480466   -0.942857  20511
+   2 │         6  0.00480466   -0.942857  20724
+   3 │        12  1.82889e-5   -0.923362  13536
+   4 │         7  0.00680719    0.892857  10157
+   5 │         7  0.00680719   -0.892857  20392
+   6 │         6  0.0188455     0.885714  20479
+   7 │        12  0.000189298  -0.875658  12762
+   8 │        12  0.000245942   0.868653  12760
+   9 │         7  0.0136973    -0.857143  20559
+  10 │        10  0.00222003   -0.842424  10925
+```
