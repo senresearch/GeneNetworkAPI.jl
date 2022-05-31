@@ -102,7 +102,7 @@ dfInfoPheno3 = GeneNetworkAPI.DataFrame(
 
 dfGemma = GeneNetworkAPI.DataFrame( 
     Mb = [25.100133],
-    additive = [4.513725],
+    additive = [-4.513725],
     chr = [2],
     lod_score = [14.164224353162899],
     name = ["rs27186439"],

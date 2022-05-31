@@ -17,13 +17,13 @@ end
 # get genotype data
 function get_geno(group, format="geno", gn_url=gn_url())
     geno_url = gn_url * "/genotypes" * "/" * group * "." * format
-    geno = parse_geno(download(geno_url))
+    geno = parse_geno(Downloads.download(geno_url))
     return geno
 end
 
 function get_pheno(dataset::String; gn_url=gn_url())
     url = gn_url * "/sample_data" * "/" * dataset * "Publish"
-    return CSV.read(download(url), DataFrame, delim=',')
+    return CSV.read(Downloads.download(url), DataFrame, delim=',')
 end
 
 function get_pheno(dataset::String,trait::String; gn_url=gn_url())
