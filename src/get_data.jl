@@ -23,7 +23,7 @@ end
 
 function get_pheno(dataset::String; gn_url=gn_url())
     url = gn_url * "/sample_data" * "/" * dataset * "Publish"
-    return CSV.read(download(url), DataFrame, delim=',')
+    return CSV.read(download(url), DataFrame, delim=',',missingstring="x")
 end
 
 function get_pheno(dataset::String,trait::String; gn_url=gn_url())
