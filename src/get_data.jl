@@ -65,15 +65,11 @@ end
 
 function info_pheno(group::String; gn_url::String=gn_url())
     url = gn_url * "traits/" * group * "Publish.json"
-    println("A")
-    println(url)
     return json2df(get_api(url))
 end
 
 function info_pheno(group::String, trait::String; gn_url::String=gn_url())
     url = gn_url * "trait/" * group * "/" * trait
-    println("B")
-    println(url)
     return json2df(get_api(url))
 end
 

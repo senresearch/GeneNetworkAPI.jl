@@ -66,12 +66,12 @@ dfInfoOmic = GeneNetworkAPI.DataFrame(
 
 # TEST 6 - refs
 dfInfoPheno1 = GeneNetworkAPI.DataFrame( 
-    Additive = [0],
-    Id = ["log2"],
-    LRS = ["mRNA expression"],
-    locus = ["HSNIH-Palmer Nucleus Accumbens Core RNA-Seq (Aug18) rlog"],
-    PhenotypeId = [860],
-    PublicationId = ["HSNIH-Rat-Acbc-RSeq-0818"],
+    Additive = [0.0499967532467532],
+    Id = [10001],
+    LRS = [16.2831307029479],
+    Locus = ["rs106114574"],
+    PhenotypeId = [1449],
+    PublicationId = [319],
     Sequence = [1]
 )
 

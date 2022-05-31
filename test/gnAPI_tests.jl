@@ -57,11 +57,11 @@ println("Get information about traits test 5: ", @test ((dfRslt1 == dfInfoNonOmi
 # TEST 6 Get summary information on traits #
 ############################################
 
-dfRslt1 = info_pheno("BXD","10001");
+dfRslt1 = filter(row->row.Id == 10001, info_pheno("HXBBXH"));
 dfRslt2 = info_pheno("BXD","10001");
 dfRslt3 = info_pheno("HC_M2_0606_P","1436869_at");
 
-println("Get summary information on traits test 6: ", @test ((dfRslt2 == dfInfoPheno2) && (dfRslt3 == dfInfoPheno3)));
+println("Get summary information on traits test 6: ", @test ((dfRslt1 == dfInfoPheno1) && (dfRslt2 == dfInfoPheno2) && (dfRslt3 == dfInfoPheno3)));
 
 ################
 # TEST 7 Gemma #
