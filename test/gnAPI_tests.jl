@@ -57,6 +57,7 @@ println("Get information about traits test 5: ", @test ((dfRslt1 == dfInfoNonOmi
 # TEST 6 Get summary information on traits #
 ############################################
 
+dfRslt1 = info_pheno("BXD","10001");
 dfRslt2 = info_pheno("BXD","10001");
 dfRslt3 = info_pheno("HC_M2_0606_P","1436869_at");
 
