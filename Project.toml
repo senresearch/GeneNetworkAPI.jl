@@ -1,6 +1,8 @@
 name = "GeneNetworkAPI"
 uuid = "5ef98721-7938-4c15-bad2-60f0fa16d62a"
-authors = ["Saunak Sen <sen@uthsc.edu>", "Chelsea Trotter <chelsea.xhu@gmail.com>"]
+authors = ["Chelsea Trotter <chelsea.xhu@gmail.com>",
+	   "Gregory Farage <gfarage@uthsc.edu>",
+	   "Saunak Sen <sen@uthsc.edu>"]
 version = "0.1.0"
 
 [deps]
