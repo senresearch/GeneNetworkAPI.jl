@@ -1,3 +1,6 @@
+
+[![CI](https://github.com/senresearch/GeneNetworkAPI.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/senresearch/GeneNetworkAPI.jl/actions/workflows/ci.yml)
+
 # GeneNetworkAPI
 
 Provides access to the [GeneNetwork](http://genenetwork.org) database
