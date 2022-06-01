@@ -1,6 +1,6 @@
 module GeneNetworkAPI
 
-using HTTP, JSON, DataFrames, CSV, BenchmarkTools
+using HTTP, JSON, DataFrames, CSV, Downloads
 
 export check_gn,
     list_species,

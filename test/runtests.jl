@@ -1,5 +1,8 @@
 using GeneNetworkAPI
-using Base.Test
+using Test
 
-# write your own tests here
-@test 1 == 1
+include("generate_ref.jl")
+
+@testset "GeneNetworkAPI.jl" begin
+    include("gnAPI_tests.jl")
+end

@@ -7,7 +7,7 @@ API](https://github.com/genenetwork/gn-docs/blob/master/api/GN2-REST-API.md).
 Karl Broman wrote the
 [GNapi](https://github.com/kbroman/GNapi/blob/main/README.md) R
 package for providing access to GeneNetwork from R.  This package
-follows th structure and function of that package closely.
+follows the structure and function of that package closely.
 
 ## Note on terminology
 
@@ -60,7 +60,7 @@ julia> list_species("rat")
 
 You could also subset (safer):
 ```
-julia> subset(list_species(), :Name => x->x.=="rat")
+julia> GeneNetworkAPI.subset(list_species(), :Name => x->x.=="rat")
 1×4 DataFrame
  Row │ FullName           Id     Name    TaxonomyId 
      │ String             Int64  String  Int64      
@@ -119,7 +119,7 @@ julia> get_geno("BXD") |> (x->first(x,10))
 ```
 
 Currently, we only support the `.geno` format which returns a data
-frame of genotypes with rows as marker and colyumns as individuals.
+frame of genotypes with rows as marker and columns as individuals.
 
 ## List datasets for a group
 
@@ -148,7 +148,7 @@ julia> list_datasets("HSNIH-Palmer")
 ## Get sample data for a group
 
 This gives you a matrix with rows as individuals/samples/strains and
-columns and "clinical" (non-omic) phenotypes.  The number after the
+columns as "clinical" (non-omic) phenotypes.  The number after the
 underscore is the phenotype number (to be used later).  Missing data
 is denoted by `x`.
 
@@ -278,7 +278,7 @@ target database.
 
 
 ```
-julia> run_correlation("HC_M2_0606_P","BXDPublish","1427571_at") |> (x->first(x,10))
+julia> run_correlation("1427571_at","HC_M2_0606_P","BXDPublish") |> (x->first(x,10))
 10×4 DataFrame
  Row │ #_strains  p_value      sample_r   trait  
      │ Int64      Float64      Float64    String 
