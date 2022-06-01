@@ -37,10 +37,10 @@ dfGeno = GeneNetworkAPI.DataFrame(
 # TEST 4 - refs
 dfPheno = GeneNetworkAPI.DataFrame(
     id = ["00077E9920", "00077E9D84"],
-    HSR_10308 = string.([223.0, 179.0]),
-    HSR_10309 = string.([226.0, 128.0]),
-    HSR_10310 = string.([123.0, 100.0]),
-    HSR_10311 = string.([70.0, 41.0]) 
+    HSR_10308 = [223.0, 179.0],
+    HSR_10309 = [226.0, 128.0],
+    HSR_10310 = [123.0, 100.0],
+    HSR_10311 = [70.0, 41.0] 
 )
 
 # TEST 5 - refs
