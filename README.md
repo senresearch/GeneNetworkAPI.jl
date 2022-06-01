@@ -149,26 +149,36 @@ julia> list_datasets("HSNIH-Palmer")
 
 This gives you a matrix with rows as individuals/samples/strains and
 columns as "clinical" (non-omic) phenotypes.  The number after the
-underscore is the phenotype number (to be used later).  Missing data
-is denoted by `x`.
+underscore is the phenotype number (to be used later).  Some data may
+be missing.
 
 ```
-julia> get_pheno("HSNIH-Palmer") |> (x->first(x,10))
-10×509 DataFrame
- Row │ id          HSR_10308  HSR_10309  HSR_10310  HSR_10311  HSR_10312  HSR_10313  HSR_10314  HSR_10315  HSR_10316  HSR_10317  HSR_10318  HSR_10319  HSR_10320  H ⋯
-     │ String15    String7    String7    String7    String7    String7    String7    String7    String15   String15   String15   String15   String15   String15   S ⋯
-─────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-   1 │ 00071F4FAF  x          x          x          x          x          x          x          x          x          x          x          x          x          x ⋯
-   2 │ 00071F6771  x          x          x          x          x          x          x          x          x          x          x          x          x          x
-   3 │ 00071F768E  x          x          x          x          x          x          x          x          x          x          x          x          x          x
-   4 │ 00071F95F9  x          x          x          x          x          x          x          x          x          x          x          x          x          x
-   5 │ 00071FB160  x          x          x          x          x          x          x          x          x          x          x          x          x          x ⋯
-   6 │ 00071FB747  x          x          x          x          x          x          x          x          x          x          x          x          x          x
-   7 │ 00072069AD  x          x          x          x          x          x          x          x          x          x          x          x          x          x
-   8 │ 0007207A73  x          x          x          x          x          x          x          x          x          x          x          x          x          x
-   9 │ 0007207BE7  x          x          x          x          x          x          x          x          x          x          x          x          x          x ⋯
-  10 │ 00072126F3  x          x          x          x          x          x          x          x          x          x          x          x          x          x
-                                                                                                                                                  495 columns omitted
+julia> get_pheno("HSNIH-Palmer") |> (x->x[81:100,:]) |> show
+20×509 DataFrame
+ Row │ id          HSR_10308  HSR_10309  HSR_10310  HSR_10311  HSR_10312  HSR_10313  HSR_10314  HSR_10315       HSR_10316       HSR_10317      ⋯
+     │ String15    Float64?   Float64?   Float64?   Float64?   Float64?   Float64?   Float64?   Float64?        Float64?        Float64?       ⋯
+─────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │ 000721E489  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing        ⋯
+   2 │ 00072AAC0D  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+   3 │ 00072AC972  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+   4 │ 00077E61DC  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+   5 │ 00077E61EC  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing        ⋯
+   6 │ 00077E61F3       18.0       43.0       25.0       42.0       36.0        8.0       43.0       -0.514286        1.14667         1.125
+   7 │ 00077E61F5  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+   8 │ 00077E6204  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+   9 │ 00077E6207       22.0       63.0       54.0       77.0       54.0       42.0       77.0        0.914286        1.07959         1.0      ⋯
+  10 │ 00077E6299  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+  11 │ 00077E62CD  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+  12 │ 00077E62D2       55.0       54.0       31.0       16.0       25.0       18.0       55.0       -2.73333         0.780392        1.22222
+  13 │ 00077E633D       25.0       47.0       58.0       35.0       27.0       35.0       58.0       -0.314286        1.19474         0.925926 ⋯
+  14 │ 00077E634B  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+  15 │ 00077E63D9  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+  16 │ 00077E641E  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+  17 │ 00077E6433      112.0      131.0      117.0       60.0       82.0       70.0      131.0       -3.94286         1.95222         2.54546  ⋯
+  18 │ 00077E64B3  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+  19 │ 00077E64BA      135.0      154.0      188.0      267.0       98.0       76.0      267.0       -3.65714         4.19178         4.35484
+  20 │ 00077E64C1  missing    missing    missing    missing    missing    missing    missing    missing         missing         missing
+                                                                                                                             498 columns omitted
 ```
 
 ## Get information about traits
