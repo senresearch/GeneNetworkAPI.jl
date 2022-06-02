@@ -92,8 +92,8 @@ function run_rqtl(dataset, trait; method="hk", model="normal", n_perm=0, control
 
     im = interval_mapping == true ? "true" : "false"
     # run_rqtl("BXDPublish", "10015", method="em", interval_mapping=TRUE)
-    url = gn_url * "mapping?trait_id=" * trait * "&db=" * dataset * "&method=rqtl" * "&rqtl_method=" * method * "&rqtl_model=" * model * "&interval_mapping=" * im 
-
+    url = gn_url * "mapping?trait_id=" * trait * "&db=" * dataset * "&method=rqtl" * "&rqtl_method=" * method * "&rqtl_model=" * model * "&num_perm=" * string(n_perm) * "&interval_mapping=" * string(interval_mapping)
+    println(url)
     return json2df(get_api(url))
 end
 
