@@ -28,7 +28,6 @@ message.
 check_gn()
 ```
 """
-
 function check_gn(url::AbstractString=gn_url())
     status = HTTP.get(url).status
     if(status==200)

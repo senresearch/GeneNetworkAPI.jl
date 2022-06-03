@@ -196,6 +196,3 @@ target database.
 run_correlation("1427571_at","HC_M2_0606_P","BXDPublish") |> (x->first(x,10))
 ```
 
-```@autodocs
-Modules = [GeneNetworkAPI]
-```
