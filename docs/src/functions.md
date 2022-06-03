@@ -4,6 +4,9 @@
 CurrentModule = GeneNetworkAPI
 ```
 
+```@index
+```
+
 ```@autodocs
 Modules = [GeneNetworkAPI]
 ```

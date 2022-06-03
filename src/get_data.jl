@@ -2,15 +2,13 @@
 # Author: Chelsea Trotter
 # This file contains the functions to get data from gene network APIs
 
-# # query genotype data. 
-# function get_geno(group; gn_url::String=gn_url())
-#     geno_url = gn_url * "/genotypes" * "/" * group
-#     # take care of extra comment symbol @ in geno file
-#     data = replace(get_api(geno_url), "\n@" => "\n#")
-#     return str2df(data, delim='\t', comments=true)
-# end
+"""                                                                                    
+    get_geno(group::String,format::String="geno";gn_url::String)
 
-# get genotype data
+Return the genotype matrix for a `group` in a given `format`.
+
+Currently works only for files in the `geno` format.
+"""
 function get_geno(group, format="geno"; gn_url::String=gn_url())
     geno_url = gn_url * "/genotypes" * "/" * group * "." * format
     geno = parse_geno(Downloads.download(geno_url))

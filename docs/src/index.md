@@ -4,8 +4,6 @@ CurrentModule = GeneNetworkAPI
 
 # Overview
 
-```@index
-```
 The [GeneNetworkAPI](https://github.com/sens/GeneNetworkAPI.jl) package provides 
 access to the [GeneNetwork](http://genenetwork.org) database
 and analysis functions using the [GeneNetwork REST
