@@ -2,10 +2,6 @@
 # Author: Chelsea Trotter
 # This file contains the functions to get data from gene network APIs
 
-function gn_url()
-    return url = "http://gn2.genenetwork.org/api/v_pre1/"
-end
-
 # # query genotype data. 
 # function get_geno(group; gn_url::String=gn_url())
 #     geno_url = gn_url * "/genotypes" * "/" * group
