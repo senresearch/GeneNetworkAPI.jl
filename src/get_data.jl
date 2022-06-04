@@ -3,28 +3,12 @@
 # This file contains the functions to get data from gene network APIs
 
 """                                                                                    
-    get_geno(group::String,format::String="geno";gn_url::String)
+    list_species(species::String="";gn_url::String=gn_url())
 
-Return the genotype matrix for a `group` in a given `format`.
-
-Currently works only for files in the `geno` format.
+Returns a data frame with a list os species respresented in the
+GeneNetwork database.  If the `species` string is non-empty, it will
+return the information of the matched species.
 """
-function get_geno(group, format="geno"; gn_url::String=gn_url())
-    geno_url = gn_url * "/genotypes" * "/" * group * "." * format
-    geno = parse_geno(Downloads.download(geno_url))
-    return geno
-end
-
-function get_pheno(dataset::String; gn_url::String=gn_url())
-    url = gn_url * "/sample_data" * "/" * dataset * "Publish"
-    return CSV.read(Downloads.download(url), DataFrame, delim=',',missingstring="x")
-end
-
-function get_pheno(dataset::String,trait::String; gn_url::String=gn_url())
-    url = gn_url * "/sample_data" * "/" * dataset * "/" * trait 
-    return json2df(get_api(url))
-end
-
 function list_species(species=""; gn_url::String=gn_url())
     if (length(species) != 0)
         url = gn_url * "species/" * species 
@@ -34,6 +18,13 @@ function list_species(species=""; gn_url::String=gn_url())
     return json2df(get_api(url))
 end
 
+"""                                                                                    
+    list_groups(species::String="";gn_url::String=gn_url())
+
+If `species` is not specified, then it returns all groups (segregating
+populations) represented in the GeneNetwork database.  If the string
+`species` is specified, then it returns all groups for that species.
+"""
 function list_groups(species=""; gn_url::String=gn_url())
     if(length(species) != 0)
         url = gn_url * "groups/" * species
@@ -43,10 +34,49 @@ function list_groups(species=""; gn_url::String=gn_url())
     return json2df(get_api(url))
 end
 
-function list_datasets(group; gn_url::String=gn_url())
+"""                                                                                    
+    list_datasetss(group::String="";gn_url::String=gn_url())
+
+Lists all datasets available in a specified `group`.
+"""
+function list_datasets(group::String; gn_url::String=gn_url())
     url = gn_url * "datasets/"  * group
     return json2df(get_api(url))
 end
+
+"""                                                                                    
+    get_geno(group::String,format::String="geno";gn_url::String=gn_url())
+
+Returns the genotype matrix for a `group` in a given `format`.
+
+Currently works only for files in the `geno` format.
+"""
+function get_geno(group, format="geno"; gn_url::String=gn_url())
+    geno_url = gn_url * "/genotypes" * "/" * group * "." * format
+    geno = parse_geno(Downloads.download(geno_url))
+    return geno
+end
+
+"""                                                                                    
+    get_pheno(dataset::String;gn_url::String=gn_url())
+
+Returns the non-omic ("clinical") phenotypes for a given `dataset`.
+"""
+function get_pheno(dataset::String; gn_url::String=gn_url())
+    url = gn_url * "/sample_data" * "/" * dataset * "Publish"
+    return CSV.read(Downloads.download(url), DataFrame, delim=',',missingstring="x")
+end
+
+"""                                                                                    
+    get_pheno(group::String,trait::String="geno";gn_url::String=gn_url())
+
+Returns a given 'trait` in a `group`.
+"""
+function get_pheno(dataset::String,trait::String; gn_url::String=gn_url())
+    url = gn_url * "/sample_data" * "/" * dataset * "/" * trait 
+    return json2df(get_api(url))
+end
+
 
 function info_dataset(dataset, trait=""; gn_url::String = gn_url())
     if(length(trait) != 0)
