@@ -70,15 +70,20 @@ end
 """                                                                                    
     get_pheno(group::String,trait::String="geno";gn_url::String=gn_url())
 
-Returns a given 'trait` in a `group`.
+Returns a given `trait` in a `group`.
 """
 function get_pheno(dataset::String,trait::String; gn_url::String=gn_url())
     url = gn_url * "/sample_data" * "/" * dataset * "/" * trait 
     return json2df(get_api(url))
 end
 
+"""
+    info_dataset(dataset::String, trait::String=""; gn_url::String = gn_url())
 
-function info_dataset(dataset, trait=""; gn_url::String = gn_url())
+Returns information about a `dataset` (if `trait` is empty), or else a
+given `trait` in a specified `dataset`.
+"""
+function info_dataset(dataset::String, trait::String=""; gn_url::String = gn_url())
     if(length(trait) != 0)
         url = gn_url * "dataset/" * dataset * "/" * trait
     else 
@@ -87,11 +92,22 @@ function info_dataset(dataset, trait=""; gn_url::String = gn_url())
     return json2df(get_api(url))
 end
 
+"""
+    info_pheno(group::String; gn_url::String=gn_url())
+
+Returns the maximum LRS for each trait in a group.
+"""
 function info_pheno(group::String; gn_url::String=gn_url())
     url = gn_url * "traits/" * group * "Publish.json"
     return json2df(get_api(url))
 end
 
+"""
+    info_pheno(group::String, trait::String; gn_url::String=gn_url())
+
+Returns the maximum LRS for each `trait` in a `group`, or
+alternatively a probe (use `trait`) in dataset (use `group`).
+"""
 function info_pheno(group::String, trait::String; gn_url::String=gn_url())
     url = gn_url * "trait/" * group * "/" * trait
     return json2df(get_api(url))
@@ -188,7 +204,7 @@ This query currently takes the following parameters:
 - method: pearson (default) | spearman
 - n_result: maximum number of results to return (default = 500)
 """
-function run_correlation(trait::String, dataset::String, group::String; tp:;String="sample",
+function run_correlation(trait::String, dataset::String, group::String; tp::String="sample",
                          method::String="pearson", n_result::Int64=500,
                          gn_url::String=gn_url())
     types = ["sample", "tissue"]
