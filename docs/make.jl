@@ -19,7 +19,7 @@ makedocs(;
     ],
 )
 
-# deploydocs(;
-#    repo="github.com/sens/GeneNetworkAPI.jl",
-#    devbranch="main",
-#)
+deploydocs(;
+   repo="github.com/sens/GeneNetworkAPI.jl",
+   devbranch="dev",
+)
