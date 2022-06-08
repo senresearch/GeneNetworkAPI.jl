@@ -276,6 +276,43 @@ julia> run_gemma("BXDPublish","10015",use_loco=true) |> (x->first(x,10))
   10 │ 4.77632  -0.906398  1     0.448914  rs36742481   0.355702
 ```
 
+### R/qtl
+
+This function performs a one-dimensional genome scan.  The arguments
+are
+
+- db (required) - DB name for trait above (Short_Abbreviation listed
+  when you query for datasets)
+- trait (required) - ID for trait being mapped
+- method - hk (default) | ehk | em | imp | mr | mr-imp |
+  mr-argmax ; Corresponds to the "method" option for the R/qtl scanone
+  function.
+- model - normal (default) | binary | 2-part | np ; corresponds
+  to the "model" option for the R/qtl scanone function
+- n_perm - number of permutations; 0 by default
+- control_marker - Name of marker to use as control; this relies on
+  the user knowing the name of the marker they want to use as a
+  covariate
+- interval_mapping - Whether to use interval mapping; "false" by default
+
+```
+julia> run_rqtl("BXDPublish", "10015") |> (x->first(x,10))
+10×5 DataFrame
+ Row │ Mb       cM       chr  lod_score  name        
+     │ Float64  Float64  Any  Float64    String      
+─────┼───────────────────────────────────────────────
+   1 │ 3.01027  3.01027  1     0.116927  rs31443144
+   2 │ 3.4922   3.4922   1     0.117404  rs6269442
+   3 │ 3.5112   3.5112   1     0.117424  rs32285189
+   4 │ 3.6598   3.6598   1     0.117573  rs258367496
+   5 │ 3.77702  3.77702  1     0.117691  rs32430919
+   6 │ 3.81227  3.81227  1     0.117727  rs36251697
+   7 │ 4.43062  4.43062  1     0.118356  rs30658298
+   8 │ 4.44674  4.44674  1     0.118372  rs51852623
+   9 │ 4.51871  4.51871  1     0.118447  rs31879829
+  10 │ 4.77632  4.77632  1     0.118714  rs36742481
+```
+
 ### Correlation
 
 This function correlates a trait in a dataset against all traits in a

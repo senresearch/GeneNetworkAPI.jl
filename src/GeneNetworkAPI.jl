@@ -2,7 +2,8 @@ module GeneNetworkAPI
 
 using HTTP, JSON, DataFrames, CSV, Downloads
 
-export check_gn,
+export gn_url,
+    check_gn,
     list_species,
     list_groups,
     list_datasets,
