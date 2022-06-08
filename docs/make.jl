@@ -21,5 +21,4 @@ makedocs(;
 
 deploydocs(;
    repo="github.com/senresearch/GeneNetworkAPI.jl",
-   devbranch="dev",
 )
