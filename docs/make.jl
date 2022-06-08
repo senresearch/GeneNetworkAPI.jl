@@ -6,11 +6,11 @@ DocMeta.setdocmeta!(GeneNetworkAPI, :DocTestSetup, :(using GeneNetworkAPI); recu
 makedocs(;
     modules=[GeneNetworkAPI],
     authors="Chelsea Trotter <chelsea.xhu@gmail.com> Gregory Farage <gfarage@uthsc.edu> and Saunak Sen <sen@uthsc.edu>",
-    repo="https://github.com/sens/GeneNetworkAPI.jl/blob/{commit}{path}#{line}",
+    repo="https://github.com/senresearch/GeneNetworkAPI.jl/blob/{commit}{path}#{line}",
     sitename="GeneNetworkAPI.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://sens.github.io/GeneNetworkAPI.jl",
+        canonical="https://senresearch.github.io/GeneNetworkAPI.jl",
         assets=String[],
     ),
     pages=[
@@ -20,6 +20,6 @@ makedocs(;
 )
 
 deploydocs(;
-   repo="github.com/sens/GeneNetworkAPI.jl",
+   repo="github.com/senresearch/GeneNetworkAPI.jl",
    devbranch="dev",
 )
