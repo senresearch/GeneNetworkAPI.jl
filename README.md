@@ -1,4 +1,4 @@
-
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://senresearch.github.io/GeneNetworkAPI.jl/dev)
 [![CI](https://github.com/senresearch/GeneNetworkAPI.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/senresearch/GeneNetworkAPI.jl/actions/workflows/ci.yml)
 
 # GeneNetworkAPI
