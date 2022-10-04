@@ -50,13 +50,20 @@ end
 
 Returns a data frame with the location name of the different geno files of 
 a group, and if available some metadata such as strain of the first filial
-generation, maternal and paternal strain.
+generation, maternal and paternal strain. 
+If there exist more than one location, the default location is indicated 
+by a `*`. 
 """
 function list_geno(group::String; gn_url::String=gn_url())
     # parse geno meta
     geno_url = string(gn_url, "genotypes/", "view/", group)
-    str_json = GeneNetworkAPI.get_api(geno_url)
-    json_parsed = GeneNetworkAPI.parse_json(str_json)
+    str_json = get_api(geno_url)
+
+    if has_error_500(str_json) 
+        return println("No metadata or could not parse json page.")
+    else
+        json_parsed = parse_json(str_json)
+    end  
 
     # check if "genofile" keys exist
     json_keys = keys(json_parsed)
@@ -75,9 +82,15 @@ function list_geno(group::String; gn_url::String=gn_url())
         end
         vmeta_geno = vcat(vmeta_geno, [genofile_location(json_parsed)])
         dfmeta_geno = DataFrame(make_rectangular(vmeta_geno), vcat(meta_keys, ["location"]))
-    else
+    else # only location available in metadata
         vmeta_geno = genofile_location(json_parsed)
         dfmeta_geno = DataFrame(location=vmeta_geno)
+    end
+
+    if length(dfmeta_geno.location) > 1
+        format = ".geno" # expect ".geno" location file
+        idx_default = findall(group*format .== dfmeta_geno.location)
+        dfmeta_geno[idx_default, :location] .= dfmeta_geno[idx_default, :location] .* "*"
     end
 
     return dfmeta_geno     

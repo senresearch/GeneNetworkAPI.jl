@@ -1,12 +1,9 @@
 
 """
-show_list_geno(group::String,...)
+    show_table(df::DataFrame)
 
-Shows the location name of the different geno files of a group,    
-and if available some metadata such as strain of the first filial
-generation, maternal and paternal strain.
+Displays a dataframe in `pretty` mode.
 """
-function show_list_geno(group::String; kwargs...)
-df = list_geno(group; kwargs...);
-DataFrames.pretty_table(df[:,:], header = names(df))
+function show_table(df)
+    DataFrames.pretty_table(df[:,:], header = names(df))
 end

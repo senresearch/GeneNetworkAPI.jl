@@ -10,12 +10,6 @@ Returns the genotype matrix for a `group` in a given `format`.
 
 Currently works only for files in the `geno` format.
 """
-# function get_geno(group, format="geno"; gn_url::String=gn_url())
-#     geno_url = gn_url * "/genotypes" * "/" * group * "." * format
-#     geno = parse_geno(Downloads.download(geno_url))
-#     return geno
-# end
-
 function get_geno(group, format="geno"; gn_url::String=gn_url())
     
     if has_genofile_meta(group; gn_url=gn_url)
@@ -24,9 +18,9 @@ function get_geno(group, format="geno"; gn_url::String=gn_url())
         
         if length(vlocation) == 1 
             group = vlocation[1][1:end-5] # expect ".geno" extension
-        else
-            println("Info: group ", group, " has additional genotype files, see locations")
-            show_list_geno(group; gn_url=gn_url)
+        # else
+            # println("Info: group ", group, " has additional genotype files, see locations")
+            # show_table(list_geno(group; gn_url=gn_url))
         end
     end
 

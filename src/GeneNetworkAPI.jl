@@ -20,7 +20,7 @@ module GeneNetworkAPI
     export run_gemma, run_rqtl, run_correlation
 
     include("./show_data.jl")
-    export show_list_geno
+    export show_table
 
     include("./utils_geno.jl")
     export parse_geno, genofile_location
