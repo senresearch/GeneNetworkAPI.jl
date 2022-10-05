@@ -24,7 +24,7 @@ function get_geno(group, format="geno"; gn_url::String=gn_url())
         end
     end
 
-    geno_url = gn_url * "/genotypes" * "/" * group * "." * format
+    geno_url = gn_url * "genotypes/" * group * "." * format
     geno = parse_geno(Downloads.download(geno_url))
     return geno
 end
