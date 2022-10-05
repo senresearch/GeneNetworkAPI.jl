@@ -94,6 +94,19 @@ ENV["COLUMNS"] = 150; #hide
 list_datasets("HSNIH-Palmer")
 ```
 
+## List meta information of genotype file
+
+To list the meta information of a genotype file for a group, you have to use the
+name as listed in the group list for a species:
+
+```@repl gnapi
+ENV["COLUMNS"] = 150; #hide
+list_geno("BXD")
+```
+
+In the case where multiple genotype dataset are associated to a group, 
+the `*` indicates the default genotype dataset.
+
 ## Get sample data for a group
 
 This gives you a matrix with rows as individuals/samples/strains and
