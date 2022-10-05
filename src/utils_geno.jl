@@ -72,5 +72,5 @@ alternative location of the files.
 function has_genofile_meta(group::String; gn_url::String=gn_url())
     geno_url = string(gn_url, "genotypes/", "view/", group)
     str_json = get_api(geno_url)
-    return @inline !has_error_500(str_json)
+    return @inline !(has_error_500(str_json))
 end
