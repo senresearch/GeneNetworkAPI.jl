@@ -24,6 +24,18 @@ dfGroup = GeneNetworkAPI.DataFrame(
 )
 
 # TEST 3 - refs
+dfMetaGeno1 = GeneNetworkAPI.DataFrame(
+    f1s = ["B6D2F1", "D2B6F1", ""],
+    mat = ["C57BL/6J", "", ""],
+    pat = ["DBA/2J", "", ""],
+    location = ["BXD.8.geno", "BXD.geno*", "BXD.4.geno"]
+)
+
+# dfMetaGeno2 = GeneNetworkAPI.DataFrame(
+#     location = ["BXD.8.geno", "BXD.geno*", "BXD.4.geno"]
+# )
+
+# TEST 4 - refs
 dfGeno = GeneNetworkAPI.DataFrame(
     Chr = ["1", "1"],
     Locus = ["rs31443144", "rs6269442"],
@@ -34,7 +46,7 @@ dfGeno = GeneNetworkAPI.DataFrame(
     BXD5 = ["D", "D"] 
 )
 
-# TEST 4 - refs
+# TEST 5 - refs
 dfPheno = GeneNetworkAPI.DataFrame(
     id = ["00077E9920", "00077E9D84"],
     HSR_10308 = [223.0, 179.0],
@@ -43,7 +55,7 @@ dfPheno = GeneNetworkAPI.DataFrame(
     HSR_10311 = [70.0, 41.0] 
 )
 
-# TEST 5 - refs
+# TEST 6 - refs
 dfInfoNonOmic = GeneNetworkAPI.DataFrame( 
     dataset_type = ["phenotype"],
     description = ["Central nervous system, behavior: Reaction time, premature initiations indicated by number of times that the rat pulled its snout out of the center hole before the imperative stimulus occurred and then put its snout back into the center hole without going to the left water feeder in the first 3-minute time epoch for males and females [n]"],
@@ -64,7 +76,7 @@ dfInfoOmic = GeneNetworkAPI.DataFrame(
     tissue_id = [17]
 )
 
-# TEST 6 - refs
+# TEST 7 - refs
 dfInfoPheno1 = GeneNetworkAPI.DataFrame( 
     Additive = [0.0499967532467532],
     Id = [10001],
@@ -98,18 +110,18 @@ dfInfoPheno3 = GeneNetworkAPI.DataFrame(
     symbol = ["Shh"],
 )
 
-# TEST 7 - refs
+# TEST 8 - refs
 
 dfGemma = GeneNetworkAPI.DataFrame( 
     Mb = [25.100133],
-    additive = [-4.513725],
+    additive = [-2.2764345],
     chr = [2],
-    lod_score = [14.164224353162899],
+    lod_score = [15.131865142718427],
     name = ["rs27186439"],
-    p_value = [6.851342e-15]
+    p_value = [7.381334e-16]
 )
 
-# TEST 8 - refs
+# TEST 9 - refs
 
 dfCorrelation = GeneNetworkAPI.DataFrame( 
     # Symbol("#_strains") = [25.100133],
