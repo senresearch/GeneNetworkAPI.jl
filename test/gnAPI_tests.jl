@@ -47,8 +47,20 @@ println("Get genotypes for a group test 4: ", @test ((dfRslt1 == filter(row->row
 ######################################
 
 dfRslt = get_pheno("HSNIH-Palmer");
-dfRslt1 = filter(row->row.id == "00077E9920", dfRslt)[:, 1:5];
-dfRslt2 = filter(row->row.id == "00077E9D84", dfRslt)[:, 1:5];
+dfRslt1 = filter(row->row.id == "00077E9920", dfRslt)[:, [
+                                                            :id,
+                                                            :HSR_10308,
+                                                            :HSR_10309,
+                                                            :HSR_10310,
+                                                            :HSR_10311
+                                                            ]];
+dfRslt2 = filter(row->row.id == "00077E9D84", dfRslt)[:, [
+                                                            :id,
+                                                            :HSR_10308,
+                                                            :HSR_10309,
+                                                            :HSR_10310,
+                                                            :HSR_10311
+                                                            ]];
 
 println("Get sample data for a group test 5: ", @test ((dfRslt1 == filter(row->row.id == "00077E9920", dfPheno)) &&
                                                      (dfRslt2 == filter(row->row.id == "00077E9D84", dfPheno))));
