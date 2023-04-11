@@ -91,7 +91,7 @@ println("Get summary information on traits test 7: ", @test ((dfRslt1 == dfInfoP
 ################
 
 dfRslt = run_gemma("BXDPublish","10015",use_loco=true);
-dfRslt1 = filter(row->row.name == "rs27186439", dfRslt);
+dfRslt1 = filter(row->row.name == "rs32869517", dfRslt);
 
 println("Get Gemma results test 8: ", @test (dfRslt1 == dfGemma));
 
