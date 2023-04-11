@@ -24,8 +24,13 @@ function get_geno(group, format="geno"; gn_url::String=gn_url())
         end
     end
 
+    # increase timeout response from the server
+    downloader = Downloads.Downloader();
+    downloader.easy_hook = (easy, info) -> Downloads.Curl.setopt(easy, Downloads.Curl.CURLOPT_LOW_SPEED_TIME, 300);
+    
     geno_url = gn_url * "genotypes/" * group * "." * format
-    geno = parse_geno(Downloads.download(geno_url))
+    geno = parse_geno(Downloads.download(geno_url; downloader=downloader))
+
     return geno
 end
 
