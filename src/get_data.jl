@@ -3,6 +3,11 @@
 ############################
 # Functions returning data #
 ############################
+
+#############
+# Geno data #
+#############
+
 """                                                                                    
     get_geno(group::String,format::String="geno";gn_url::String=gn_url())
 
@@ -34,13 +39,17 @@ function get_geno(group, format="geno"; gn_url::String=gn_url())
     return geno
 end
 
+##############
+# Pheno data #
+##############
+
 """                                                                                    
     get_pheno(dataset::String;gn_url::String=gn_url())
 
 Returns the non-omic ("clinical") phenotypes for a given `dataset`.
 """
 function get_pheno(dataset::String; gn_url::String=gn_url())
-    url = gn_url * "/sample_data" * "/" * dataset * "Publish"
+    url = gn_url * "sample_data" * "/" * dataset * "Publish"
     return CSV.read(Downloads.download(url), DataFrame, delim=',',missingstring="x")
 end
 
@@ -50,7 +59,27 @@ end
 Returns a given `trait` in a `group`.
 """
 function get_pheno(dataset::String,trait::String; gn_url::String=gn_url())
-    url = gn_url * "/sample_data" * "/" * dataset * "/" * trait 
+    url = gn_url * "sample_data" * "/" * dataset * "/" * trait 
     return json2df(get_api(url))
 end
 
+
+##############
+# Omics data #
+##############
+
+
+"""                                                                                    
+    get_omics(dataset::String;gn_url::String=gn_url())
+
+Returns the omic phenotypes for a given `dataset`.
+"""
+function get_omics(dataset::String; gn_url::String=gn_url())
+# increase timeout response from the server
+    downloader = Downloads.Downloader();
+    downloader.easy_hook = (easy, info) -> Downloads.Curl.setopt(easy, Downloads.Curl.CURLOPT_LOW_SPEED_TIME, 300);
+
+    omics_url = gn_url * "sample_data" * "/" * dataset
+
+    return CSV.read(Downloads.download(omics_url; downloader=downloader), DataFrame, delim=',',missingstring="x")
+end
