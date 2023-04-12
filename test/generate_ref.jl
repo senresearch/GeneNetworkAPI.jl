@@ -39,7 +39,7 @@ dfMetaGeno1 = GeneNetworkAPI.DataFrame(
 dfGeno = GeneNetworkAPI.DataFrame(
     Chr = ["1", "1"],
     Locus = ["rs31443144", "rs6269442"],
-    cM = [1.5, 1.5],
+    cM = [0.11, 0.21],
     Mb = [3.010274, 3.492195],
     BXD1 = ["B", "B"],
     BXD2 = ["B", "B"],
@@ -79,12 +79,16 @@ dfInfoOmic = GeneNetworkAPI.DataFrame(
 # TEST 7 - refs
 dfInfoPheno1 = GeneNetworkAPI.DataFrame( 
     Additive = [0.0499967532467532],
+    Authors = ["Pravenec M, Zidek V, Musilova A, Simakova M, Kostka V, Mlejnek P, Kren V, Krenova D, Bila V, Mikova B, Jachymova M, Horky K, Kazdova L, St Lezin E, Kurtz TW"],
+    Chr = ["8"],
+    Description = ["Original post publication description: insulin concentrations, 8 weeks old, fed a normal lab chow (0 days) - male"],
     Id = [10001],
     LRS = [16.2831307029479],
     Locus = ["rs106114574"],
-    PhenotypeId = [1449],
-    PublicationId = [319],
-    Sequence = [1]
+    Mb = [27.969673],
+    Mean = [0.1836399993300438], 
+    PubMedID = [12016513],
+    Year = ["2002"]
 )
 
 dfInfoPheno2 = GeneNetworkAPI.DataFrame( 
@@ -113,12 +117,12 @@ dfInfoPheno3 = GeneNetworkAPI.DataFrame(
 # TEST 8 - refs
 
 dfGemma = GeneNetworkAPI.DataFrame( 
-    Mb = [25.100133],
-    additive = [-2.2764345],
+    Mb = [24.916883],
+    additive = [-2.292895],
     chr = [2],
-    lod_score = [15.131865142718427],
-    name = ["rs27186439"],
-    p_value = [7.381334e-16]
+    lod_score = [15.186008593663088],
+    name = ["rs32869517"],
+    p_value = [6.516155e-16]
 )
 
 # TEST 9 - refs
