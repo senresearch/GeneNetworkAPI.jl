@@ -84,7 +84,7 @@ dfInfoPheno1 = GeneNetworkAPI.DataFrame(
     Description = ["Original post publication description: insulin concentrations, 8 weeks old, fed a normal lab chow (0 days) - male"],
     Id = [10001],
     LRS = [16.2831307029479],
-    Locus = ["rs106114574"],
+    Locus = ["rsRn10010063"], # previsou GN2 update => ["rs106114574"],
     Mb = [27.969673],
     Mean = [0.1836399993300438], 
     PubMedID = [12016513],
