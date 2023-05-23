@@ -129,7 +129,7 @@ dfGemma = GeneNetworkAPI.DataFrame(
 
 dfCorrelation = GeneNetworkAPI.DataFrame( 
     # Symbol("#_strains") = [25.100133],
-    p_value = [0.006807187408935392],
-    sample_r = [0.8928571428571429],
-    trait = ["10157"]
+    p_value = [0.00018929765647785504],
+    sample_r = [-0.8756580854229329],
+    trait = [12762]
 )

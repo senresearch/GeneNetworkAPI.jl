@@ -100,7 +100,7 @@ println("Get Gemma results test 8: ", @test (dfRslt1 == dfGemma));
 ######################
 
 dfRslt = run_correlation("1427571_at","HC_M2_0606_P","BXDPublish");
-dfRslt1 = GeneNetworkAPI.select(filter(row->row.trait == "10157", dfRslt), [2,3,4]);
+dfRslt1 = GeneNetworkAPI.select(filter(row->row.trait == 12762, dfRslt), [2,3,4]);
 
 println("Get correlation test 9: ", @test (dfRslt1 == dfCorrelation));
 

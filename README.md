@@ -184,6 +184,16 @@ julia> get_pheno("HSNIH-Palmer") |> (x->x[81:100,:]) |> show
                                                                                                                              498 columns omitted
 ```
 
+To obtain omics phenotypes, you can utilize the `get_omics()` function, which provides a matrix with individuals/samples/strains as rows and omic phenotypes as columns. This function requires the input of a short abbreviation representing the available (omic) datasets for a particular group. To obtain the short abbreviation, you can refer to the section titled "List datasets for a group" and use the `list_dataset()` function.
+For instance, if you want to acquire the phenotype matrix corresponding to "HSNIH-Palmer Infralimbic Cortex RNA-Seq (Aug18) rlog," you would use its respective short abbreviation.
+```
+julia> get_omics("HSNIH-Rat-IL-RSeq-0818")
+
+```
+
+
+underscore is the phenotype number (to be used later).  Some data may
+be missing.
 ## Get information about traits
 
 To get information on a particular (non-omic) trait use the group name
