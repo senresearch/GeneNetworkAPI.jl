@@ -70,37 +70,48 @@ println("Get sample data for a group test 5: ", @test ((dfRslt1 == filter(row->r
 # TEST 6 Get information about traits #
 #######################################
 
+dfRslt = get_omics("INIA_AmgCoh_0311");
+idx = findall(dfRslt.id .== "BXD1");
+
+println("Get value about omic data 6: ", @test ((dfRslt."10338001"[idx][1] == dfPhenoOmic."10338001"[2]) &&
+                                                (dfRslt."10338003"[idx][1] .== dfPhenoOmic."10338003"[2])));
+
+
+#######################################
+# TEST 7 Get information about traits #
+#######################################
+
 dfRslt1 = info_dataset("HSNIH-Palmer","10308");
 dfRslt2 = info_dataset("HSNIH-Rat-Acbc-RSeq-Aug18");
 
-println("Get information about traits test 6: ", @test ((dfRslt1 == dfInfoNonOmic) && (dfRslt2 == dfInfoOmic)));
+println("Get information about traits test 7: ", @test ((dfRslt1 == dfInfoNonOmic) && (dfRslt2 == dfInfoOmic)));
 
 
 ############################################
-# TEST 7 Get summary information on traits #
+# TEST 8 Get summary information on traits #
 ############################################
 
 dfRslt1 = filter(row->row.Id == 10001, info_pheno("HXBBXH"));
 dfRslt2 = info_pheno("BXD","10001");
 dfRslt3 = info_pheno("HC_M2_0606_P","1436869_at");
 
-println("Get summary information on traits test 7: ", @test ((dfRslt1 == dfInfoPheno1) && (dfRslt2 == dfInfoPheno2) && (dfRslt3 == dfInfoPheno3)));
+println("Get summary information on traits test 8: ", @test ((dfRslt1 == dfInfoPheno1) && (dfRslt2 == dfInfoPheno2) && (dfRslt3 == dfInfoPheno3)));
 
-# ################
-# TEST 8 Gemma #
+# ##############
+# TEST 9 Gemma #
 ################
 
 dfRslt = run_gemma("BXDPublish","10015",use_loco=true);
 dfRslt1 = filter(row->row.name == "rs32869517", dfRslt);
 
-println("Get Gemma results test 8: ", @test (dfRslt1 == dfGemma));
+println("Get Gemma results test 9: ", @test (dfRslt1 == dfGemma));
 
 ######################
-# TEST 9 Correlation #
+# TEST 10 Correlation #
 ######################
 
 dfRslt = run_correlation("1427571_at","HC_M2_0606_P","BXDPublish");
 dfRslt1 = GeneNetworkAPI.select(filter(row->row.trait == 12762, dfRslt), [2,3,4]);
 
-println("Get correlation test 9: ", @test (dfRslt1 == dfCorrelation));
+println("Get correlation test 10: ", @test (dfRslt1 == dfCorrelation));
 

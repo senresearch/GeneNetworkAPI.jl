@@ -56,6 +56,14 @@ dfPheno = GeneNetworkAPI.DataFrame(
 )
 
 # TEST 6 - refs
+dfPhenoOmic = GeneNetworkAPI.DataFrame(
+    ["D2B6F1" 12.766 11.317;
+     "BXD1" 12.524 11.042],
+     ["id", "10338001", "10338003"]
+)
+
+
+# TEST 7 - refs
 dfInfoNonOmic = GeneNetworkAPI.DataFrame( 
     dataset_type = ["phenotype"],
     description = ["Central nervous system, behavior: Reaction time, premature initiations indicated by number of times that the rat pulled its snout out of the center hole before the imperative stimulus occurred and then put its snout back into the center hole without going to the left water feeder in the first 3-minute time epoch for males and females [n]"],
@@ -76,7 +84,7 @@ dfInfoOmic = GeneNetworkAPI.DataFrame(
     tissue_id = [17]
 )
 
-# TEST 7 - refs
+# TEST 8 - refs
 dfInfoPheno1 = GeneNetworkAPI.DataFrame( 
     Additive = [0.0499967532467532],
     Authors = ["Pravenec M, Zidek V, Musilova A, Simakova M, Kostka V, Mlejnek P, Kren V, Krenova D, Bila V, Mikova B, Jachymova M, Horky K, Kazdova L, St Lezin E, Kurtz TW"],
@@ -114,7 +122,7 @@ dfInfoPheno3 = GeneNetworkAPI.DataFrame(
     symbol = ["Shh"],
 )
 
-# TEST 8 - refs
+# TEST 9 - refs
 
 dfGemma = GeneNetworkAPI.DataFrame( 
     Mb = [24.916883],
@@ -125,7 +133,7 @@ dfGemma = GeneNetworkAPI.DataFrame(
     p_value = [6.516155e-16]
 )
 
-# TEST 9 - refs
+# TEST 10 - refs
 
 dfCorrelation = GeneNetworkAPI.DataFrame( 
     # Symbol("#_strains") = [25.100133],
