@@ -1,7 +1,7 @@
 name = "GeneNetworkAPI"
 uuid = "5ef98721-7938-4c15-bad2-60f0fa16d62a"
 authors = ["Chelsea Trotter <chelsea.xhu@gmail.com>", "Gregory Farage <gfarage@uthsc.edu>", "Saunak Sen <sen@uthsc.edu>"]
-version = "0.1.1"
+version = "0.2.0"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
@@ -9,10 +9,11 @@ DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Latexify = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
 
 [compat]
-julia = "1.7"
 CSV = "0.10, 1"
 DataFrames = "1"
 HTTP = "0.9, 1"
 JSON = "0.21, 1"
+julia = "1.7"

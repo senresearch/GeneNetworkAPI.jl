@@ -24,17 +24,29 @@ dfGroup = GeneNetworkAPI.DataFrame(
 )
 
 # TEST 3 - refs
+dfMetaGeno1 = GeneNetworkAPI.DataFrame(
+    f1s = ["B6D2F1", "D2B6F1", ""],
+    mat = ["C57BL/6J", "", ""],
+    pat = ["DBA/2J", "", ""],
+    location = ["BXD.8.geno", "BXD.geno*", "BXD.4.geno"]
+)
+
+# dfMetaGeno2 = GeneNetworkAPI.DataFrame(
+#     location = ["BXD.8.geno", "BXD.geno*", "BXD.4.geno"]
+# )
+
+# TEST 4 - refs
 dfGeno = GeneNetworkAPI.DataFrame(
     Chr = ["1", "1"],
     Locus = ["rs31443144", "rs6269442"],
-    cM = [1.5, 1.5],
+    cM = [0.11, 0.21],
     Mb = [3.010274, 3.492195],
     BXD1 = ["B", "B"],
     BXD2 = ["B", "B"],
     BXD5 = ["D", "D"] 
 )
 
-# TEST 4 - refs
+# TEST 5 - refs
 dfPheno = GeneNetworkAPI.DataFrame(
     id = ["00077E9920", "00077E9D84"],
     HSR_10308 = [223.0, 179.0],
@@ -43,7 +55,15 @@ dfPheno = GeneNetworkAPI.DataFrame(
     HSR_10311 = [70.0, 41.0] 
 )
 
-# TEST 5 - refs
+# TEST 6 - refs
+dfPhenoOmic = GeneNetworkAPI.DataFrame(
+    ["D2B6F1" 12.766 11.317;
+     "BXD1" 12.524 11.042],
+     ["id", "10338001", "10338003"]
+)
+
+
+# TEST 7 - refs
 dfInfoNonOmic = GeneNetworkAPI.DataFrame( 
     dataset_type = ["phenotype"],
     description = ["Central nervous system, behavior: Reaction time, premature initiations indicated by number of times that the rat pulled its snout out of the center hole before the imperative stimulus occurred and then put its snout back into the center hole without going to the left water feeder in the first 3-minute time epoch for males and females [n]"],
@@ -64,15 +84,19 @@ dfInfoOmic = GeneNetworkAPI.DataFrame(
     tissue_id = [17]
 )
 
-# TEST 6 - refs
+# TEST 8 - refs
 dfInfoPheno1 = GeneNetworkAPI.DataFrame( 
     Additive = [0.0499967532467532],
+    Authors = ["Pravenec M, Zidek V, Musilova A, Simakova M, Kostka V, Mlejnek P, Kren V, Krenova D, Bila V, Mikova B, Jachymova M, Horky K, Kazdova L, St Lezin E, Kurtz TW"],
+    Chr = ["8"],
+    Description = ["Original post publication description: insulin concentrations, 8 weeks old, fed a normal lab chow (0 days) - male"],
     Id = [10001],
     LRS = [16.2831307029479],
-    Locus = ["rs106114574"],
-    PhenotypeId = [1449],
-    PublicationId = [319],
-    Sequence = [1]
+    Locus = ["rsRn10010063"], # previsou GN2 update => ["rs106114574"],
+    Mb = [27.969673],
+    Mean = [0.1836399993300438], 
+    PubMedID = [12016513],
+    Year = ["2002"]
 )
 
 dfInfoPheno2 = GeneNetworkAPI.DataFrame( 
@@ -98,22 +122,22 @@ dfInfoPheno3 = GeneNetworkAPI.DataFrame(
     symbol = ["Shh"],
 )
 
-# TEST 7 - refs
+# TEST 9 - refs
 
 dfGemma = GeneNetworkAPI.DataFrame( 
-    Mb = [25.100133],
-    additive = [-4.513725],
+    Mb = [24.916883],
+    additive = [-2.292895],
     chr = [2],
-    lod_score = [14.164224353162899],
-    name = ["rs27186439"],
-    p_value = [6.851342e-15]
+    lod_score = [15.186008593663088],
+    name = ["rs32869517"],
+    p_value = [6.516155e-16]
 )
 
-# TEST 8 - refs
+# TEST 10 - refs
 
 dfCorrelation = GeneNetworkAPI.DataFrame( 
     # Symbol("#_strains") = [25.100133],
-    p_value = [0.006807187408935392],
-    sample_r = [0.8928571428571429],
-    trait = ["10157"]
+    p_value = [0.00018929765647785504],
+    sample_r = [-0.8756580854229329],
+    trait = [12762]
 )
