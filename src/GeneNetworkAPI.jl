@@ -14,7 +14,7 @@ module GeneNetworkAPI
     export info_dataset, info_pheno
 
     include("./get_data.jl")
-    export get_geno, get_pheno
+    export get_geno, get_pheno, get_omics
 
     include("./run_data.jl")
     export run_gemma, run_rqtl, run_correlation

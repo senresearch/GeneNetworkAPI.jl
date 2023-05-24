@@ -184,6 +184,35 @@ julia> get_pheno("HSNIH-Palmer") |> (x->x[81:100,:]) |> show
                                                                                                                              498 columns omitted
 ```
 
+To obtain omics phenotypes, you can utilize the `get_omics()` function, which provides a matrix with individuals/samples/strains as rows and omic phenotypes as columns. This function requires the input of a short abbreviation representing the available (omic) datasets for a particular group. To obtain the short abbreviation, you can refer to the section titled "List datasets for a group" and use the `list_dataset()` function.
+For instance, if you want to acquire the phenotype matrix corresponding to "HSNIH-Palmer Infralimbic Cortex RNA-Seq (Aug18) rlog," you would use its respective short abbreviation.
+```
+julia> get_omics("HSNIH-Rat-IL-RSeq-0818")
+6171×32624 DataFrame
+  Row │ id          ENSRNOG00000000001  ENSRNOG00000000007  ENSRNOG00000000008  ENSRNOG00000000009  ENSRNOG00000000010  ENSRNOG00000000012  ENSRNO ⋯
+      │ String15    Float64?            Float64?            Float64?            Float64?            Float64?            Float64?            Float6 ⋯
+──────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    1 │ 00071F4FAF             missing             missing             missing             missing             missing             missing         ⋯
+    2 │ 00071F6771             missing             missing             missing             missing             missing             missing        
+    3 │ 00071F768E             missing             missing             missing             missing             missing             missing        
+    4 │ 00071F95F9             missing             missing             missing             missing             missing             missing        
+    5 │ 00071FB160             missing             missing             missing             missing             missing             missing         ⋯
+    6 │ 00071FB747             missing             missing             missing             missing             missing             missing        
+    7 │ 00072069AD             missing             missing             missing             missing             missing             missing
+  ⋮   │     ⋮               ⋮                   ⋮                   ⋮                   ⋮                   ⋮                   ⋮                  ⋱
+ 6165 │ 0007929918             missing             missing             missing             missing             missing             missing
+ 6166 │ 0007929945             missing             missing             missing             missing             missing             missing         ⋯
+ 6167 │ 00077E840E             missing             missing             missing             missing             missing             missing
+ 6168 │ 00077E9879             missing             missing             missing             missing             missing             missing
+ 6169 │ 00077E9920             missing             missing             missing             missing             missing             missing
+ 6170 │ 00077E9D84             missing             missing             missing             missing             missing             missing         ⋯
+ 6171 │ 00077E949D             missing             missing             missing             missing             missing             missing
+                                                                                                                 32617 columns and 6157 rows omitted
+```
+
+
+underscore is the phenotype number (to be used later).  Some data may
+be missing.
 ## Get information about traits
 
 To get information on a particular (non-omic) trait use the group name
