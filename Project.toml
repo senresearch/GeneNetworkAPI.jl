@@ -1,7 +1,7 @@
 name = "GeneNetworkAPI"
 uuid = "5ef98721-7938-4c15-bad2-60f0fa16d62a"
 authors = ["Chelsea Trotter <chelsea.xhu@gmail.com>", "Gregory Farage <gfarage@uthsc.edu>", "Saunak Sen <sen@uthsc.edu>"]
-version = "0.2.0"
+version = "0.3.0"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
