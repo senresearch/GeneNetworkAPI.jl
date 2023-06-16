@@ -115,3 +115,23 @@ dfRslt1 = GeneNetworkAPI.select(filter(row->row.trait == 12762, dfRslt), [2,3,4]
 
 println("Get correlation test 10: ", @test (dfRslt1 == dfCorrelation));
 
+#########################
+# TEST 11 download geno #
+#########################
+
+file_downloaded = download_geno("BXD", path = "BXD_raw.geno");
+
+println("Download geno file test 11: ", @test (isfile(file_downloaded)));
+
+rm(file_downloaded)
+
+
+##########################
+# TEST 12 download pheno #
+##########################
+
+file_downloaded = download_pheno("HSNIH-Palmer", path = "HSNIH-Palmer.csv");
+
+println("Download pheno file test 12: ", @test (isfile(file_downloaded)));
+
+rm(file_downloaded)
