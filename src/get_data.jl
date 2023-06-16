@@ -32,18 +32,18 @@ end
     get_pheno(dataset::String;gn_url::String=gn_url())
 
 Returns the non-omic ("clinical") phenotypes for a given `dataset`.
-"""
-function get_pheno(dataset::String; gn_url::String=gn_url())
-    pheno_file = download_pheno(dataset; gn_url = gn_url)
-    
-    return CSV.read(pheno_file, DataFrame, delim=',',missingstring="x")
-end
 
-"""                                                                                    
-    get_pheno(group::String,trait::String="geno";gn_url::String=gn_url())
+---
+
+    get_pheno(dataset::String,trait::String; gn_url::String=gn_url())
 
 Returns a given `trait` in a `group`.
 """
+function get_pheno(dataset::String; gn_url::String=gn_url())
+    pheno_file = download_pheno(dataset; gn_url = gn_url)   
+    return CSV.read(pheno_file, DataFrame, delim=',',missingstring="x")
+end
+
 function get_pheno(dataset::String,trait::String; gn_url::String=gn_url())
     url = gn_url * "sample_data" * "/" * dataset * "/" * trait 
     return json2df(get_api(url))
@@ -54,18 +54,12 @@ end
 # Omics data #
 ##############
 
-
 """                                                                                    
     get_omics(dataset::String;gn_url::String=gn_url())
 
 Returns the omic phenotypes for a given `dataset`.
 """
 function get_omics(dataset::String; gn_url::String=gn_url())
-# increase timeout response from the server
-    downloader = Downloads.Downloader();
-    downloader.easy_hook = (easy, info) -> Downloads.Curl.setopt(easy, Downloads.Curl.CURLOPT_LOW_SPEED_TIME, 300);
-
-    omics_url = gn_url * "sample_data" * "/" * dataset
-
-    return CSV.read(Downloads.download(omics_url; downloader=downloader), DataFrame, delim=',',missingstring="x")
+    omics_file = download_omics(dataset; gn_url= gn_url)
+    return CSV.read(omics_file, DataFrame, delim=',',missingstring="x")
 end

@@ -135,3 +135,13 @@ file_downloaded = download_pheno("HSNIH-Palmer", path = "HSNIH-Palmer.csv");
 println("Download pheno file test 12: ", @test (isfile(file_downloaded)));
 
 rm(file_downloaded)
+
+##########################
+# TEST 13 download omics #
+##########################
+
+file_downloaded = download_omics("INIA_AmgCoh_0311");
+
+println("Download pheno file test 13: ", @test (isfile(file_downloaded)));
+
+rm(file_downloaded)
