@@ -74,7 +74,7 @@ julia> GeneNetworkAPI.subset(list_species(), :Name => x->x.=="rat")
 ## List groups for a species
 
 Since the information is organized by segregating population
-("group"), it is useful to get a list for a preticular species you
+("group"), it is useful to get a list for a particular species you
 might be interested in.
 
 ```
