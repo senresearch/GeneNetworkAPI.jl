@@ -13,6 +13,9 @@ module GeneNetworkAPI
     include("./info_data.jl")
     export info_dataset, info_pheno
 
+    include("./download_data.jl")
+    export download_geno, download_pheno, download_omics
+
     include("./get_data.jl")
     export get_geno, get_pheno, get_omics
 
@@ -23,7 +26,7 @@ module GeneNetworkAPI
     export show_table
 
     include("./utils_geno.jl")
-    export parse_geno, genofile_location
+    export parse_geno, genofile_location, has_genofile_meta
 
     include("./utils.jl")
     export make_rectangular, has_error_500
