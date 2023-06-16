@@ -14,7 +14,7 @@ module GeneNetworkAPI
     export info_dataset, info_pheno
 
     include("./download_data.jl")
-    export download_geno
+    export download_geno, download_pheno, download_omics
 
     include("./get_data.jl")
     export get_geno, get_pheno, get_omics
