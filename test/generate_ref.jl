@@ -126,11 +126,11 @@ dfInfoPheno3 = GeneNetworkAPI.DataFrame(
 
 dfGemma = GeneNetworkAPI.DataFrame( 
     Mb = [24.916883],
-    additive = [-2.292895],
-    chr = [2],
-    lod_score = [15.186008593663088],
+    additive = [-2.292896],
+    chr = Vector{Any}([2]),
+    lod_score = [15.186000529222568],
     name = ["rs32869517"],
-    p_value = [6.516155e-16]
+    p_value = [6.516276e-16]
 )
 
 # TEST 10 - refs
@@ -139,5 +139,5 @@ dfCorrelation = GeneNetworkAPI.DataFrame(
     # Symbol("#_strains") = [25.100133],
     p_value = [0.00018929765647785504],
     sample_r = [-0.8756580854229329],
-    trait = [12762]
+    trait = string.([12762])
 )
