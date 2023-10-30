@@ -15,7 +15,7 @@ different instance of the server.
 
 ```jldoctest
 julia> gn_url()
-"http://gn2.genenetwork.org/api/v_pre1/"
+"https://gn2.genenetwork.org/api/v_pre1/"
 ```
 """
 function gn_url()
