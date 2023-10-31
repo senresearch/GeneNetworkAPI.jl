@@ -20,6 +20,7 @@ GeneNetworkAPI.check_gn
 GeneNetworkAPI.list_datasets
 GeneNetworkAPI.list_groups
 GeneNetworkAPI.list_species
+GeneNetworkAPI.list_geno
 ```
 
 ## Get data and information
@@ -27,8 +28,33 @@ GeneNetworkAPI.list_species
 ```@docs
 GeneNetworkAPI.get_geno
 GeneNetworkAPI.get_pheno
+GeneNetworkAPI.get_omics
 GeneNetworkAPI.info_dataset
 GeneNetworkAPI.info_pheno
+
+```
+## Download data
+
+```@docs
+GeneNetworkAPI.download_geno
+GeneNetworkAPI.download_pheno
+GeneNetworkAPI.download_omics
+```
+
+## Display table
+
+```@docs
+GeneNetworkAPI.show_table
+```
+
+## Utils
+
+```@docs
+GeneNetworkAPI.make_rectangular
+GeneNetworkAPI.has_error_500
+GeneNetworkAPI.parse_geno
+GeneNetworkAPI.genofile_location
+GeneNetworkAPI.has_genofile_meta
 ```
 
 ## Run jobs on the server
