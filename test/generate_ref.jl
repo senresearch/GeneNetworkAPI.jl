@@ -126,11 +126,11 @@ dfInfoPheno3 = GeneNetworkAPI.DataFrame(
 
 dfGemma = GeneNetworkAPI.DataFrame( 
     Mb = [24.916883],
-    additive = [-2.292895],
-    chr = [2],
-    lod_score = [15.186008593663088],
+    additive = [-2.292896],
+    chr = Vector{Any}([2]),
+    lod_score = [15.186000529222568],
     name = ["rs32869517"],
-    p_value = [6.516155e-16]
+    p_value = [6.516276e-16]
 )
 
 # TEST 10 - refs
